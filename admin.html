@@ -921,11 +921,25 @@ input[type="checkbox"] {
         <div onclick="voltar()" style="width: 80px; height: 30px; color: rgb(0, 0, 0); padding-top: 2px; cursor: pointer; background-color: white; border-radius: 12px;">
      Voltar
         </div>
+
+
+          <p id="textotitulo" style="margin: 0 auto; text-align: center; width: 100%; color: white;"></p>
+
+        <div style="display: flex;">
+
+          <button style="color: #252525;" id="anterior">Dia Anterior</button>
+
+          <span id="dataAtual" style="color: #ffffff;"></span>
+
+          <button style="color: #252525;" id="proximo">Próximo Dia</button>
+
+        </div>
+
         <table id="dataTable" style="background-color: white;">
             <thead>
                 <tr>
                     <th>Horários</th>
-                    <th>Disponibilidade</th>
+                    <th>Cliente</th>
                     <th style="width: 200px;">Ações</th>
                 </tr>
             </thead>
@@ -1143,7 +1157,8 @@ function fazerRequisicaoGet() {
         .then(data => {
             if (data && data.horarios) {
                 document.getElementById('textotitulo').innerText = `Horários de ${data.diadasemana}, ${data.data}`;
-                document.getElementById('textotitulo').style.color = 'black'
+     
+
                 populateTable(data.horarios);
             }
         });
@@ -1215,21 +1230,38 @@ function populateTable(horarios) {
         horarioTd.textContent = hora;
         tr.appendChild(horarioTd);
 
-        const disponibilidadeTd = document.createElement('td');
-        disponibilidadeTd.textContent = horarios[hora].disponibilidade ? 'Disponível' : 'Indisponível';
-        tr.appendChild(disponibilidadeTd);
+    
 
         const actionTd = document.createElement('td');
         actionTd.style.textAlign = 'Center';
 
+
+        if (horarios[hora].nome) {
+          nome = horarios[hora].nome
+          tel = horarios[hora].tel
+
+              const disponibilidadeTd = document.createElement('td');
+            disponibilidadeTd.textContent =  `Nome: ${nome} | Telefone: ${tel}`;
+            tr.appendChild(disponibilidadeTd);
+
+
+
+        } else {
+          const disponibilidadeTd = document.createElement('td');
+            disponibilidadeTd.textContent = 'Sem clientes nesse hoário'
+            tr.appendChild(disponibilidadeTd);
+        }
+
+
         if (horarios[hora].disponibilidade) {
-            const btn = createButton('Agendar', hora);
-            btn.classList.add('agendarhorario');
-            actionTd.appendChild(btn);
+          const pIndisponivel = document.createElement('p');
+            pIndisponivel.textContent = 'Horário livre';
+            pIndisponivel.style = 'color: yellow; text-align: center';
+            actionTd.appendChild(pIndisponivel);
         } else {
             const pIndisponivel = document.createElement('p');
-            pIndisponivel.textContent = 'Horário indisponível';
-            pIndisponivel.style = 'color: red; text-align: center';
+            pIndisponivel.textContent = 'Horário agendado';
+            pIndisponivel.style = 'color: green; text-align: center';
             actionTd.appendChild(pIndisponivel);
         }
 

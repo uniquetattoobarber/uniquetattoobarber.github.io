@@ -837,7 +837,7 @@ input[type="checkbox"] {
 
   
 
-  <div id="modalnome" class="bgL" style="z-index: 51;" >
+  <div id="modalnome" class="bgL" style="z-index: 200;" >
     <div class="bgconteudo2" style="z-index: 50; width: 200px; height: 200px;">
 
       
@@ -850,7 +850,7 @@ input[type="checkbox"] {
         <div class="bgcontentt" style="position: relative; top: 0px; padding: 20px; text-align: center;">
 
           <input type="text" id="nome" placeholder="nome">
-          <input style="margin-top: 20px;" type="text" id="email" placeholder="Email">
+          <input style="margin-top: 20px;" type="text" id="email" placeholder="Telefone (Whatsapp)">
 
           <br>
           <button style="color: #252525; margin-top: 20px;" onclick="marcarhorario()">Agendar horário</button>
@@ -1116,7 +1116,7 @@ input[type="checkbox"] {
         <div style="margin: 0 auto; text-align: center; width: 100%; display: flex;">
       
           <div class="video">
-            <video src="video1.mp4" id="videoPlayer" type="video/mp4"  style="width: 300px; margin: 0 auto; text-align: center; " loop="true" ></video>
+            <video src="video1.mp4" id="videoPlayer" type="video/mp4"  style="width: 300px; margin: 0 auto; text-align: center; " loop="true"></video>
             
             <div class="btnvideoplay" id="btnplayvieo1" onclick="videoplay()">
             <img src="playbtn.png" width="50px">
@@ -1125,7 +1125,7 @@ input[type="checkbox"] {
 
 
           <div class="video">
-            <video src="video2.mp4" id="videoPlayer2" type="video/mp4"  style="width: 300px; margin: 0 auto; text-align: center; " loop="true"></video>
+            <video src="video2.mp4" id="videoPlayer2" type="video/mp4"  style="width: 300px; margin: 0 auto; text-align: center; " loop="true" ></video>
             
             <div class="btnvideoplay" id="btnplayvieo2" onclick="videoplay2()">
             <img src="playbtn.png" width="50px">
@@ -1185,6 +1185,12 @@ input[type="checkbox"] {
           <a class="social-btn social-btn-fb" href="#">Фэйсбук</a>
           <a class="social-btn social-btn-inst" href="#">Инстаграм</a>
         </section>
+
+        <section class="footer-social">
+          <a class="btn" onclick="admin()">Admin</a>
+        </section>
+
+
        
       </div>
     </footer>
@@ -1233,7 +1239,9 @@ function sucesso(){
           }, 2000);
 }
 
-
+function admin(){
+  window.location.href = `https://uniquetattoobarber.github.io/admin.html`
+}
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(event) {
                 event.preventDefault();
@@ -1274,12 +1282,17 @@ function abrirmodalcolocarnome(hora){
 function fecharmodalnome(id){
   const elemento = document.getElementById(id);
     elemento.style.display = 'none';
+
+    const elemento2 = document.getElementById('modalnome');
+    elemento2.style.display = 'none';
+
+    
 }
 
 
 function marcarhorario() {
-  const email = document.getElementById('email')
-  const nome = document.getElementById('nome')
+  const tel = document.getElementById('email').value
+  const nome = document.getElementById('nome').value
 
   console.log(horaglobal)
 
@@ -1291,7 +1304,7 @@ function marcarhorario() {
     fetch(url, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ disponibilidade: false })
+        body: JSON.stringify({ disponibilidade: false, tel: tel, nome: nome})
     }).then(response => response.json())
       .then(data => {
           console.log('Horário atualizado:', data);
