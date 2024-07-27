@@ -808,6 +808,24 @@ input[type="checkbox"] {
             margin: 0 auto;
             width: 100%;
       }
+      .animated-box {
+    width: 100px;
+    height: 100px;
+
+    animation: upDown 3s infinite;
+}
+
+@keyframes upDown {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-50px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
 </style>
 
 
@@ -933,7 +951,7 @@ input[type="checkbox"] {
           </ul>
         </nav>
         <div class="user-block">
-          <a class="login" href="#">Sair</a>
+          <a class="login" href="https://www.google.com">Sair</a>
         </div>
       </div>
     </header>
@@ -942,7 +960,7 @@ input[type="checkbox"] {
 
     <main class="container" style="padding-top: 130px;" id="menu">
         
-    <div class="contato" onclick="redireciona()">
+    <div class="contato animated-box" onclick="redireciona()">
       
     </div>
 

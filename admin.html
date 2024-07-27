@@ -813,7 +813,24 @@ input[type="checkbox"] {
           margin: 0 auto;
           text-align: center;
         }
-      
+        .animated-box {
+    width: 100px;
+    height: 100px;
+    background-color: #3498db;
+    animation: upDown 2s infinite;
+}
+
+@keyframes upDown {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-50px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
 </style>
 
 
@@ -867,7 +884,7 @@ input[type="checkbox"] {
           </ul>
         </nav>
         <div class="user-block">
-          <a class="login" href="#">Sair</a>
+          <a class="login" onclick="sair()">Sair</a>
         </div>
       </div>
     </header>
@@ -978,7 +995,9 @@ input[type="checkbox"] {
 
 
     <script>
-
+function sair(){
+  location.reload()
+}
       function voltar(){
         const bg1 = document.getElementById('clientes')
     bg1.style.display = 'none'
