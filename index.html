@@ -7,7 +7,6 @@
 <style>
     body {
   width: 100%;
-  min-width: 960px;
   margin: 0;
   padding: 0;
   background: url('https://loriens.github.io/barbershop/img/background.png') center top no-repeat #000000;
@@ -123,7 +122,10 @@ main {
 }
 
 .container {
-  width: 940px;
+  width: 100%;
+  max-width: 940px;
+  text-align: center;
+  
   margin: 0 auto;
   padding: 0 10px;
   min-height: 70px;
@@ -826,13 +828,67 @@ input[type="checkbox"] {
         transform: translateY(0);
     }
 }
+
+.videocontainer{
+  margin: 0 auto; text-align: center; width: 100%; display: flex;
+}
+
+
+@media screen and (max-width: 700px) {
+
+            .main-header{
+               width: 70%;
+               
+            }
+
+
+            .container{
+              width: 100%;
+                max-width: 400px;
+              
+                text-align: center;
+                align-items: center;
+                margin: 0 auto;
+            }
+            .features{
+              max-width: 100px;
+            }
+             .btnvideoplay{
+              
+            }
+            #logo{
+              position: relative;
+              left: 0px;
+            }
+            .videocontainer{
+              display: block;
+            }
+
+      #itenstexto{
+          position: relative;
+          left: 50px;
+            }
+           #sobre{
+            width: 100px;
+      
+           }
+           .contato{
+            position: relative;
+            left: 80%;
+            
+           }
+        }
+
+
+
+       
 </style>
 
 
 
   </head>
 
-
+<body>
 
 
   
@@ -926,7 +982,6 @@ input[type="checkbox"] {
 </div>
 
 
-  <body>
 
 
     <header class="main-header" style="position: fixed; z-index: 41; width: 100%;">
@@ -969,7 +1024,8 @@ input[type="checkbox"] {
       </div>
 
 
-      <section class="features clearfix" style="margin-top: 50px;">
+      <section class="features clearfix" id="itenstexto" style="margin-top: 50px;">
+
         <div class="features-item">
           <b class="features-name">Melhor ambiente</b>
           <p>Desfrute de um ambiente acolhedor e único, pensado para seu conforto.</p>
@@ -983,6 +1039,9 @@ input[type="checkbox"] {
           <p>Serviços de alta qualidade com preços justos e acessíveis para todos.</p>
         </div>
       </section>
+
+
+
 
 
 
@@ -1113,7 +1172,7 @@ input[type="checkbox"] {
       </div>
 
 
-        <div style="margin: 0 auto; text-align: center; width: 100%; display: flex;">
+        <div class="videocontainer">
       
           <div class="video">
             <video src="video1.mp4" id="videoPlayer" type="video/mp4"  style="width: 300px; margin: 0 auto; text-align: center; " loop="true"></video>
