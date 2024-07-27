@@ -1,0 +1,175 @@
+
+<div id="modalhorario" class="bgL">
+  
+    <div class="bgconteudo2">
+        <div style="position: relative; left: 380px; top: -40px; margin-bottom: 0;" class="fechar" onclick="fecharmodal('modalhorario')">
+            <p>X</p>
+
+         </div>
+
+         <p id="textotitulo" style="margin: 0 auto; text-align: center; width: 100%;"></p>
+
+          <div class="bgcontentt" style="position: relative; top: 0px;">  
+        
+            <div class="containertable">
+                <table id="dataTable">
+                    <thead>
+                        <tr>
+                            <th>Horários</th>
+                            
+                            <th>Dia da semana</th>
+                            
+                           
+                            <th style="width: 200px;">Ações</th>
+                           
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Linhas serão adicionadas dinamicamente aqui -->
+                    </tbody>
+                </table>
+            </div>
+        
+       
+          </div>   
+        
+ 
+        
+    </div>
+ </div>
+ 
+
+
+  
+ 
+
+
+
+    <script>
+
+    function abrirmodal(id){
+            const elemento = document.getElementById(id)
+            elemento.style.display = 'initial'
+
+            setTimeout(() => {
+                fazerRequisicaoGet()
+            }, '2000');
+        }
+
+        function fecharmodal(id){
+            const elemento = document.getElementById(id)
+            elemento.style.display = 'none'
+        }
+
+        function marcarhorario(){
+
+        }
+
+        function pegarhorarios(){
+
+        }
+
+
+
+
+
+
+        //--------------------------
+
+           // pegar o mes da data atual e puxar ali
+
+           const mes = '01'
+            //dia = 
+
+            function fazerRequisicaoGet() {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', `https://thtato-20e86-default-rtdb.firebaseio.com/meses/${mes}/dias.json`, true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    const relatorios = JSON.parse(xhr.responseText);
+                
+                    populateTable(relatorios);
+                    
+                }
+            };
+            xhr.send();
+            }
+
+
+
+
+    function populateTable(data) {
+    
+        const tbody = document.querySelector('#dataTable tbody');
+        tbody.innerHTML = '';
+
+        dataglobal = data
+      console.log(data)
+        
+
+       
+        for (var id in data) {
+           
+            var relatorio = data[id];
+            //console.log(relatorio)
+            const tr = document.createElement('tr');
+
+            const datadia = document.createElement('td');
+            datadia.textContent = relatorio.data  || 'N/A';
+            tr.appendChild(datadia);
+
+            const diadasemana = document.createElement('td');
+            diadasemana.textContent = relatorio.diadasemana  || 'N/A';
+            tr.appendChild(diadasemana);
+
+
+
+            //console.log(relatorio.validadonafuncao)
+
+
+            const actionTd = document.createElement('td');
+               actionTd.style.textAlign = 'Center'
+            tr.appendChild(actionTd);
+
+           
+          
+       if (relatorio.Erro === true) {
+             
+                const btn = createButton('Agendar', id);
+                btn.classList.add('agendarhorario');
+                actionTd.appendChild(btn);
+           
+
+            }else{
+                
+                const pValidado = document.createElement('p');
+                pValidado.textContent = 'Horário indisponível';
+                pValidado.style = 'color: red; text-align: center'
+                actionTd.appendChild(pValidado);
+                actionTd.classList.add('actions');
+            }
+
+
+            tr.appendChild(actionTd);
+            tbody.appendChild(tr);
+          
+
+    
+        }
+    }
+
+    function createButton(text, id) {
+        const button = document.createElement('button');
+        button.textContent = text;
+        button.addEventListener('click', () => handleAction(id, text));
+        return button;
+    }
+
+    function handleAction(id, action) {
+        console.log(id, action)
+        if(action == 'Agendar'){
+            update(id)
+        }
+       
+      
+    }

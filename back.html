@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="utf-8">
+    <title>Barbearia & Estúdio de Tatuagem</title>    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700&amp;subset=latin,cyrillic">
+    <style>
+      body {
+        width: 100%;
+        min-width: 960px;
+        margin: 0;
+        padding: 0;
+        background: url('https://loriens.github.io/barbershop/img/background.png') center top no-repeat #000000;
+        color: #ffffff;
+        font-size: 14px;
+        font-weight: 700;
+        font-family: "PT Sans Narrow", Arial, sans-serif;
+        line-height: 24px;
+        text-transform: uppercase;
+      }
+
+      input:focus::-webkit-input-placeholder,
+      input:focus::-moz-placeholder,
+      input:focus:-ms-input-placeholder {
+        color: transparent;
+      }
+
+      .main-header {
+        display: block;
+        margin-bottom: 63px;
+        background-color: #000000;
+        color: #ffffff;
+      }
+
+      .wrapper {
+        width: 940px;
+        margin: 0 auto;
+        padding: 0 10px;
+        min-height: 70px;
+      }
+
+      .clearfix {
+        content: "";
+        display: table;
+        clear: both;
+      }
+
+      .main-navigation {
+        float: left;
+        width: 780px;
+        min-height: 70px;
+      }
+
+      .main-navigation ul {
+        margin: 0;
+        padding: 0;
+        font-size: 0;
+        list-style: none;
+      }
+
+      .main-navigation li {
+        display: inline-block;
+        vertical-align: top;
+        font-size: 16px;
+        line-height: 20px;
+      }
+
+      .main-navigation a {
+        display: block;
+        padding: 25px 20px;
+        color: #ffffff;
+        text-decoration: none;
+      }
+
+      .user-block {
+        float: right;
+        max-width: 140px;
+        min-height: 70px;
+      }
+
+      .login {
+        display: inline-block;
+        position: relative;
+        padding: 25px 20px 25px 53px;
+        color: #ffffff;
+        font-size: 16px;
+        line-height: 20px;
+        text-decoration: none;
+        vertical-align: top; 
+      }
+
+      .login::before {
+        content: "";
+        position: absolute;
+        width: 18px;
+        height: 16px;
+        top: 28px;
+        left: 20px;
+        background: url(https://loriens.github.io/barbershop/img/sprite.png) -5px -239px no-repeat;
+        opacity: 0.3;
+      }
+
+      .main-navigation a:hover,
+      .login:hover {
+        background: #242424;
+      }
+
+      .login:hover::before {
+        opacity: 1;
+      }
+
+      main {
+        display: block;
+      }
+
+      .container {
+        width: 940px;
+        margin: 0 auto;
+        padding: 0 10px;
+        min-height: 70px;
+      }
+
+      .index-logo {
+        width: 368px;
+        height: 204px;
+        margin: 0 auto 19px;
+        padding-left: 10px;
+        min-height: 204px;
+      }
+
+      .features {
+        margin-bottom: 78px;
+      }
+
+      .features-item {
+        float: left;
+        width: 300px;
+        margin-right: 20px;
+        text-align: center;
+      }
+
+      .features-name {
+        display: block;
+        position: relative;
+        margin-bottom: 25px;
+        padding-bottom: 35px;
+        font-size: 30px;
+        line-height: 42px;
+      }
+
+      .features-name::after {
+        content: "";
+        position: absolute;
+        bottom: 3px;
+        left: 50%;
+        display: block;
+        width: 20px;
+        height: 20px;
+        margin-left: -10px;
+        background-color: #ffffff;
+        transform: rotate(45deg);
+      }
+
+      .features-item:last-child {
+        margin-right: 0;
+      }
+
+      .features-item p {
+        margin: 10px 10px 0;
+      }
+
+      .index-content {
+        width: 780px;
+        margin-bottom: 35px;
+        padding: 45px 80px 50px;
+        color: #000000;
+        background: url(https://loriens.github.io/barbershop/img/separator.png) center no-repeat, #f8f5f2 url("http://i.imgur.com/YtkFoYk.jpg");
+      }
+
+      .index-content-left {
+        float: left;
+        width: 380px;
+      }
+
+      .index-content-title {
+        margin: 0 0 20px;
+        font-size: 30px;
+        line-height: 42px;
+      }
+
+      .news-preview {
+        margin: 0;
+        padding: 0 35px 0 0;
+        list-style: none;
+      }
+
+      .news-preview li {
+        margin-bottom: 25px;
+      }
+
+      .news-preview p {
+        margin-bottom: 0;
+      }
+
+      .news-preview time {
+        text-decoration: none;
+        text-transform: none;
+      }
+
+      .btn {
+        display: inline-block;
+        width: 140px;
+        margin: 0 16px 0 auto;
+        padding: 10px 0;
+        font-size: 14px;
+        line-height: 24px;
+        text-align: center;
+        vertical-align: top;
+        text-decoration: none;
+        text-transform: uppercase;
+        color: #ffffff;
+        background-color: #000000;
+        border: 0;
+        outline: 0;
+        cursor: pointer;
+      }
+
+      .btn:hover,
+      .btn:active {
+        background: #663d15;
+      }
+
+      .btn:disabled {
+        cursor: default;
+        opacity: 0.5;
+      }
+
+      .btn:disabled:hover {
+        background: #000;
+      }
+
+      .index-content-right {
+        float: right;
+        width: 300px;
+      }
+
+      .gallery {
+        position: relative;
+        height: 260px;
+      }
+
+      .gallery-content {
+        height: 164px;
+        margin: 0;
+        background-color: #cccccc;
+        border: 7px solid #ffffff;
+      }
+
+      .gallery .btn {
+        display: inline-block;
+        vertical-align: top;
+        text-decoration: none;
+        position: absolute;
+        bottom: 0;
+        width: 140px;
+        margin: 0;
+        padding: 10px 0;
+        font: inherit;
+        line-height: 24px;
+        text-transform: uppercase;
+        color: #ffffff;
+        background-color: #000000;
+        border: 0;
+        outline: 0;
+        cursor: pointer;
+      }
+
+      .gallery .btn {
+        position: absolute;
+        bottom: 0;
+        width: 140px;
+        margin: 0;
+      }
+
+      .gallery-prev {
+        left: 0;
+      }
+
+      .gallery-next {
+        right: 0;
+      }
+
+      .appointment-form {
+        padding-top: 5px;
+      }
+
+      .appointment-form input {
+        float: left;
+        width: 106px;
+        margin-right: 20px;
+        margin-bottom: 20px;
+        padding: 7px 15px;
+        font: inherit;
+        color: inherit;
+        text-transform: inherit;
+        background-color: #f9f6f3;
+        border: 2px solid #000000;
+        outline: 0;
+      }
+
+      .appointment-form input:nth-child(2n) {
+        margin-right: 0;
+      }
+
+      .appointment-form .btn {
+        clear: both;
+        width: 100%;
+        font: inherit;
+      }
+
+      .main-footer {
+        display: block;
+        margin-top: 65px;
+        padding-top: 60px;
+        padding-bottom: 40px;
+        color: #ffffff;
+        background: url("https://loriens.github.io/barbershop/img/pattern-black.jpg") #252525;
+      }
+
+      .footer-contacts {
+        float: left;
+        width: 320px;
+        min-height: 90px;
+      }
+
+      .footer-contacts a {
+        color: #ffffff;
+      }
+
+      .footer-social {
+        float: left;
+        width: 180px;
+        padding-left: 60px;
+        text-align: center;
+      }
+
+      .footer-social p {
+        margin: 0 0 15px;
+      }
+
+      .social-btn {
+        display: inline-block;
+        vertical-align: top;
+        text-decoration: none;
+        width: 43px;
+        height: 43px;
+        margin: 0 2px;
+        font-size: 0;
+        background: url("https://loriens.github.io/barbershop/img/sprite-social.png") no-repeat;
+      }
+
+      .social-btn-instagram {
+        background-position: -4px -89px;
+      }
+
+      .social-btn-vk {
+        background-position: -61px -89px;
+      }
+
+      .social-btn-facebook {
+        background-position: -4px -146px;
+      }
+
+      .footer-copyright {
+        float: right;
+        width: 320px;
+        text-align: right;
+      }
+
+      .footer-navigation {
+        display: inline-block;
+        width: 100%;
+        margin-bottom: 20px;
+        font-size: 0;
+        list-style: none;
+      }
+
+      .footer-navigation li {
+        display: inline-block;
+        font-size: 16px;
+      }
+
+      .footer-navigation a {
+        display: inline-block;
+        padding: 0 5px;
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .footer-navigation a:hover {
+        text-decoration: underline;
+      }
+
+      .footer-logo {
+        display: inline-block;
+        vertical-align: top;
+        width: 35px;
+        height: 35px;
+        margin-right: 8px;
+        background: url("https://loriens.github.io/barbershop/img/sprite.png") -171px -251px no-repeat;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="main-header">
+      <div class="wrapper clearfix">
+        <nav class="main-navigation">
+          <ul>
+            <li><a href="#">Serviços</a></li>
+            <li><a href="#">Preços</a></li>
+            <li><a href="#">Estúdio de Tatuagem</a></li>
+            <li><a href="#">Sobre</a></li>
+            <li><a href="#">Contato</a></li>
+          </ul>
+        </nav>
+        <div class="user-block"><a class="login" href="#">Login</a></div>
+      </div>
+    </header>
+    <main>
+      <div class="container">
+        <section class="index-logo">
+          <img src="https://loriens.github.io/barbershop/img/logo.png" width="368" height="204" alt="Barbearia">
+        </section>
+        <section class="features clearfix">
+          <article class="features-item">
+            <h2 class="features-name">Serviços</h2>
+            <p>Oferecemos uma variedade de serviços, incluindo cortes de cabelo, barbas e cuidados com a pele.</p>
+          </article>
+          <article class="features-item">
+            <h2 class="features-name">Preços</h2>
+            <p>Preços acessíveis para todos os nossos serviços de alta qualidade.</p>
+          </article>
+          <article class="features-item">
+            <h2 class="features-name">Estúdio de Tatuagem</h2>
+            <p>Artistas talentosos prontos para transformar suas ideias em arte corporal.</p>
+          </article>
+        </section>
+        <section class="index-content clearfix">
+          <div class="index-content-left">
+            <h2 class="index-content-title">Novidades</h2>
+            <ul class="news-preview">
+              <li>
+                <p><time datetime="2024-07-19">19 de julho de 2024</time> - Nova linha de produtos de cuidados com a barba lançada!</p>
+              </li>
+              <li>
+                <p><time datetime="2024-06-01">1 de junho de 2024</time> - Estúdio de Tatuagem agora aberto!</p>
+              </li>
+            </ul>
+            <button class="btn">Ver Mais</button>
+          </div>
+          <div class="index-content-right">
+            <div class="gallery">
+              <div class="gallery-content">
+                <img src="https://loriens.github.io/barbershop/img/photo1.jpg" alt="Foto da Barbearia" width="286" height="164">
+              </div>
+              <button class="btn gallery-prev">Anterior</button>
+              <button class="btn gallery-next">Próximo</button>
+            </div>
+            <div class="appointment-form">
+              <input type="text" placeholder="Nome">
+              <input type="email" placeholder="Email">
+              <input type="tel" placeholder="Telefone">
+              <input type="datetime-local" placeholder="Data e Hora">
+              <button class="btn">Agendar</button>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+    <footer class="main-footer">
+      <div class="wrapper clearfix">
+        <div class="footer-contacts">
+          <p>Email: <a href="mailto:contato@barbearia.com">contato@barbearia.com</a></p>
+          <p>Telefone: (11) 1234-5678</p>
+        </div>
+        <div class="footer-social">
+          <p>Siga-nos</p>
+          <a class="social-btn social-btn-instagram" href="https://instagram.com" target="_blank" aria-label="Instagram"></a>
+          <a class="social-btn social-btn-vk" href="https://vk.com" target="_blank" aria-label="VK"></a>
+          <a class="social-btn social-btn-facebook" href="https://facebook.com" target="_blank" aria-label="Facebook"></a>
+        </div>
+        <div class="footer-copyright">
+          <ul class="footer-navigation">
+            <li><a href="#">Termos de Uso</a></li>
+            <li><a href="#">Política de Privacidade</a></li>
+            <li><a href="#">Mapa do Site</a></li>
+          </ul>
+          <p>&copy; 2024 Barbearia. Todos os direitos reservados.</p>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

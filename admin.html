@@ -1,0 +1,1265 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>UniqueTattooBarber</title>    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700&amp;subset=latin,cyrillic">
+
+<style>
+    body {
+  width: 100%;
+  min-width: 960px;
+  margin: 0;
+  padding: 0;
+  background: url('https://loriens.github.io/barbershop/img/background.png') center top no-repeat #000000;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 700;
+  font-family: "PT Sans Narrow", Arial, sans-serif;
+  line-height: 24px;
+  text-transform: uppercase;
+}
+
+input:focus::-webkit-input-placeholder {
+    color: transparent;
+}
+
+input:focus::-moz-placeholder {
+    color: transparent;
+}
+
+input:focus:-ms-input-placeholder {
+    color: transparent;
+}
+
+.main-header {
+  display: block;
+  margin-bottom: 63px;
+  background-color: #000000a6;
+  color: #ffffff;
+ 
+}
+
+.wrapper {
+  width: 940px;
+  margin: 0 auto;
+  padding: 0 10px;
+  min-height: 70px;
+}
+
+.clearfix {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.main-navigation {
+  float: left;
+  width: 780px;
+  min-height: 70px;
+}
+
+.main-navigation ul {
+  margin: 0;
+  padding: 0;
+  font-size: 0;
+  list-style: none;
+}
+
+.main-navigation li {
+  display: inline-block;
+  vertical-align: top;
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.main-navigation a {
+  display: block;
+  padding: 25px 20px;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.user-block {
+  float: right;
+  max-width: 140px;
+  min-height: 70px;
+}
+
+.login {
+  display: inline-block;
+  position: relative;
+  padding: 25px 20px 25px 53px;
+  color: #ffffff;
+  font-size: 16px;
+  line-height: 20px;
+  text-decoration: none;
+  vertical-align: top; 
+}
+
+.login::before {
+  content: "";
+  position: absolute;
+  width: 18px;
+  height: 16px;
+  top: 28px;
+  left: 20px;
+  background: url(https://loriens.github.io/barbershop/img/sprite.png) -5px -239px no-repeat;
+  opacity: 0.3
+}
+
+.main-navigation a:hover {
+  background: #242424;
+}
+
+.login:hover {
+  background: #242424;
+}
+.login:hover:before {
+  opacity: 1;
+}
+
+main {
+  display: block
+}
+
+.container {
+  width: 940px;
+  margin: 0 auto;
+  padding: 0 10px;
+  min-height: 70px;
+}
+
+.index-logo {
+  width: 368px;
+  height: 204px;
+  margin: 0 auto 19px;
+  padding-left: 10px;
+  min-height: 204px;
+}
+
+.features {
+  margin-bottom: 78px;
+}
+
+.features-item {
+  float: left;
+  width: 300px;
+  margin-right: 20px;
+  text-align: center
+}
+
+.features-name {
+  display: block;
+  position: relative;
+  margin-bottom: 25px;
+  padding-bottom: 35px;
+  font-size: 30px;
+  line-height: 42px;
+}
+
+.features-name::after {
+	content: "";
+	position: absolute;
+	bottom: 3px;
+	left: 50%;
+	display: block;
+	width: 20px;
+	height: 20px;
+	margin-left: -10px;
+	background-color: #ffffff;
+	-webkit-transform: rotate(45deg);
+	transform: rotate(45deg);
+}
+
+.features-item:last-child {
+  margin-right: 0
+}
+
+.features-item p {
+	margin: 10px 10px 0;
+}
+
+.index-content {
+  width: 780px;
+  margin-bottom: 35px;
+  padding: 45px 80px 50px;
+  color: #000000;
+  background: url(https://loriens.github.io/barbershop/img/separator.png) center no-repeat, #f8f5f2 url("http://i.imgur.com/YtkFoYk.jpg");
+}
+
+.index-content-left {
+  float: left;
+  width: 380px;
+}
+
+.index-content-title {
+  margin: 0 0 20px;
+  font-size: 30px;
+  line-height: 42px;
+}
+
+.news-preview {
+	margin: 0;
+	padding: 0 35px 0 0;
+	list-style: none;
+}
+
+.news-preview li {
+	margin-bottom: 25px;
+}
+
+.news-preview p {
+	margin-bottom: 0;
+}
+
+.news-preview time {
+	text-decoration: none;
+	text-transform: none;
+}
+
+.btn {
+  display: inline-block;
+	width: 140px;
+	margin: 0 16px 0 auto;
+	padding: 10px 0;
+	font-size: 14px;
+	line-height: 24px;
+  text-align: center;
+	vertical-align: top;
+	text-decoration: none;
+	text-transform: uppercase;
+	color: #ffffff;
+	background-color: #000000;
+	border: 0;
+	outline: 0;
+	cursor: pointer;
+}
+
+.btn:hover,.btn:active {
+  background: #663d15;
+}
+.btn:disabled {
+  cursor: default;
+  opacity: 0.5;
+}
+.btn:disabled:hover {
+  background: #000;
+}
+
+.index-content-right {
+	float: right;
+	width: 300px;
+}
+
+.gallery {
+	position: relative;
+	height: 260px;
+}
+
+.gallery-content {
+	height: 164px;
+	margin: 0;
+	background-color: #cccccc;
+	border: 7px solid #ffffff;
+}
+
+.gallery .btn {
+	display: inline-block;
+	vertical-align: top;
+	text-decoration: none;
+	position: absolute;
+	bottom: 0;
+	width: 140px;
+	margin: 0;
+	padding: 10px 0;
+	font: inherit;
+	line-height: 24px;
+	text-transform: uppercase;
+	color: #ffffff;
+	background-color: #000000;
+	border: 0;
+	outline: 0;
+	cursor: pointer;
+}
+
+.gallery .btn {
+  position :absolute;
+  bottom:0;
+  width: 140px;
+  margin: 0;
+}
+.gallery-prev {
+  left: 0;
+}
+.gallery-next {
+  right: 0;
+}
+
+.btn:disabled {
+	cursor: default;
+	opacity: 0.5;
+}
+
+.btn:hover {
+	background: #663d15;
+}
+
+.appointment-form {
+	padding-top: 5px;
+}
+
+.appointment-form input {
+	float: left;
+	width: 106px;
+	margin-right: 20px;
+	margin-bottom: 20px;
+	padding: 7px 15px;
+	font: inherit;
+	color: inherit;
+	text-transform: inherit;
+	background-color: #f9f6f3;
+	border: 2px solid #000000;
+	outline: 0;
+}
+
+.appointment-form input:nth-child(2n) {
+	margin-right: 0;
+}
+
+.appointment-form .btn {
+	clear: both;
+	width: 100%;
+  font: inherit
+}
+
+.main-footer {
+  display: block;
+  margin-top: 65px;
+  padding-top: 60px;
+  padding-bottom: 40px;
+  color: #ffffff;
+  background: url("https://loriens.github.io/barbershop/img/pattern-black.jpg") #252525
+}
+
+.footer-contacts {
+	float: left;
+	width: 320px;
+	min-height: 90px;
+}
+
+.footer-contacts a {
+  color: #ffffff
+}
+
+.footer-social {
+  float: left;
+  width: 180px;
+  padding-left: 60px;
+  text-align: center;
+}
+
+.footer-social p {
+  margin: 0 0 15px
+}
+
+.social-btn {
+	display: inline-block;
+	vertical-align: top;
+	text-decoration: none;
+	width: 43px;
+	height: 43px;
+	margin: 0 2px;
+	font-size: 0;
+	background: url("https://loriens.github.io/barbershop/img/sprite.png") center no-repeat #000000;
+	-webkit-transition: background-position 0.5s,background-color 0.5s;
+	transition: background-position 0.5s,background-color 0.5s;
+}
+
+.social-btn:hover {
+	background-color: #ffffff;
+}
+
+.social-btn-vk {
+	background-position: -5px -265px;
+}
+
+.social-btn-vk:hover {
+	background-position: -5px -318px;
+}
+
+.social-btn-fb {
+	background-position: -5px -27px;
+}
+
+.social-btn-fb:hover {
+	background-position: -5px -80px;
+}
+
+.social-btn-inst {
+	background-position: -5px -133px;
+}
+
+.social-btn-inst:hover {
+	background-position: -5px -186px;
+}
+
+.footer-copyright {
+	float: right;
+	width: 180px;
+	margin-right: -20px;
+	max-width: 180px;
+  text-align: center
+}
+
+.footer-copyright p {
+	margin: 0 0 15px;
+	text-align: center;
+}
+
+.footer-copyright .btn {
+	margin-right: 0;
+}
+
+.modal-content {
+  display: none;
+	position: fixed;
+	top: 120px;
+	left: 50%;
+	width: 300px;
+	margin-left: -230px;
+	padding: 50px 80px;
+	color: #000000;
+	background: url("http://i.imgur.com/YtkFoYk.jpg") #f8f3f0;
+	box-shadow: 0 30px 50px rgba(0, 1, 1, 0.75);
+	z-index: 1000;
+}
+
+.modal-content-show {
+	-webkit-animation: bounce 0.6s;
+	animation: bounce 0.6s;
+}
+
+.modal-content-map {
+  display: none;
+  position: absolute;
+  right: 29.5%;
+  top: 575px;
+  width: 767px;
+  height: 561px;
+  z-index: 999;
+  border: 7px solid #ffffff;
+  box-shadow: 0 30px 50px rgba(0, 1, 1, 0.75);
+}
+
+.modal-content-close,
+.modal-content-map-close {
+	position: absolute;
+	top: 0;
+	right: -34px;
+	width: 22px;
+	height: 22px;
+	font-size: 0;
+	background-color: transparent;
+	border: 0;
+	outline: 0;
+	cursor: pointer;
+}
+
+.modal-content-close::before, 
+.modal-content-close::after,
+.modal-content-map-close::before,
+.modal-content-map-close::after{
+	content: "";
+	position: absolute;
+	top: 10px;
+	left: 2px;
+	width: 19px;
+	height: 3px;
+	background-color: #d0d0d0;
+	border-radius: 1px;
+}
+
+.modal-content-close::before,
+.modal-content-map-close::before{
+	-webkit-transform: rotate(45deg);
+	transform: rotate(45deg);
+}
+
+.modal-content-close::after,
+.modal-content-map-close::after{
+	-webkit-transform: rotate(-45deg);
+	transform: rotate(-45deg);
+}
+
+.modal-content h2 {
+	margin: 0 0 20px;
+	font-size: 30px;
+	line-height: 42px;
+}
+
+.modal-content p {
+	margin: 0 0 14px;
+}
+
+.modal-content .login-form {
+	margin-top: 30px;
+	margin-bottom: 10px;
+}
+
+.login-form input.icon-user {
+	background-image: url("https://loriens.github.io/barbershop/img/ico-user.png");
+	background-repeat: no-repeat;
+	background-position: 96% 50%;
+}
+
+.login-form input.icon-password {
+	background-image: url("https://loriens.github.io/barbershop/img/ico-locked.png");
+	background-repeat: no-repeat;
+	background-position: 96% 50%;
+}
+
+.login-form input[type="text"], .login-form input[type="password"] {
+	width: 241px;
+	margin: 0 0 10px;
+	padding: 10px 40px 10px 15px;
+	font-size: 14px;
+	line-height: 24px;
+	font-family: "PT Sans Narrow",Arial,sans-serif;
+	color: #000;
+	text-transform: uppercase;
+	background-color: #f9f6f3;
+	border: 2px solid #000;
+	outline: 0;
+}
+
+.login-checkbox {
+	position: relative;
+	padding-left: 30px;
+	cursor: pointer;
+}
+
+.login-checkbox:hover {
+	color: #663d15;
+}
+
+.login-checkbox input[type="checkbox"] {
+	display: none;
+}
+
+input[type="checkbox"] {
+	box-sizing: border-box;
+	padding: 0;
+}
+
+.login-checkbox input[type="checkbox"] + .checkbox-indicator {
+	position: absolute;
+	top: -3px;
+	left: 0;
+	width: 17px;
+	height: 17px;
+	border: 2px solid #000000;
+}
+
+.login-checkbox input[type="checkbox"]:checked + .checkbox-indicator::before, .login-checkbox input[type="checkbox"]:checked + .checkbox-indicator::after {
+	content: "";
+	position: absolute;
+	top: 8px;
+	left: 1px;
+	width: 15px;
+	height: 2px;
+	background-color: #000;
+}
+
+.login-checkbox input[type="checkbox"]:checked + .checkbox-indicator::before {
+	-webkit-transform: rotate(45deg);
+	transform: rotate(45deg);
+}
+
+.login-checkbox input[type="checkbox"]:checked + .checkbox-indicator::after {
+	-webkit-transform: rotate(-45deg);
+	transform: rotate(-45deg);
+}
+
+.login-form .restore {
+	float: right;
+	color: #000;
+}
+
+.login-form .btn {
+	width: 100%;
+	margin-top: 15px;
+  font: inherit
+}
+
+
+
+
+#header {
+  text-align: center; 
+  color: #ee3d2b;
+  padding-bottom: 20px;
+  h1 {
+    font-size: 32px;
+  }
+  h3 {
+    font-size: 16px;
+    font-weight: 300;
+  }
+  a {
+    color: #ee3d2b;
+  }
+}
+
+.images-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill,     minmax(290px, 1fr)); 
+  justify-items: center;
+  grid-gap: 18px;
+  grid-row-gap: 75px;
+  cursor: pointer;
+  
+    .img {
+    margin: 15px;
+    padding: 2px;
+    width: 100%;
+
+    height: 200px;
+  }
+  .imggrid{
+    height: 250px;
+    width: 270px;
+  }
+
+  .img-scale img {
+    transition: all 0.8s;
+  }
+
+  .img-scale:hover img{
+    transform: scale(1.2);
+  }
+}
+
+#footer {
+  text-align: center;
+  padding: 35px 0 25px 0; 
+  small { 
+    font-size: 16px;
+    color: #ee3d2b;
+    font-weight: 300;
+  }
+}
+
+.containertitulo{
+    margin: 0 auto;
+    width: 100%;
+    padding: 20px;
+    text-align: center;
+
+    font-size: 30px;
+    color: white;
+    font-weight: 1;
+}
+.nossotrabalho{
+    margin-bottom: 100px;
+}
+.contato{
+    width: 100px;
+    height: 100px;
+  
+    background-image: url('wpp.png');
+    top: 540px;
+    background-size: cover; /* Ajusta a imagem para cobrir todo o fundo */
+    background-repeat: no-repeat; /* Evita que a imagem se repita */
+    background-position: center center; 
+    border-radius: 300px;
+    cursor: pointer;
+    left: 90%;
+    position: fixed;
+}
+
+.bgL{
+      display: none;
+         position: fixed;
+         top: 0;
+         left: 0;
+         width: 100%;
+         height: 100%;
+         background-color: rgba(0, 0, 0, 0.5); /* Fundo escuro semi-transparente */
+         justify-content: center;
+         align-items: center;
+         z-index: 100;
+}
+.bgconteudo2{
+         width: 750px;
+         height: 100%;
+         max-height: 480px;
+         
+         margin: 50px auto;
+         background-color: #fff;
+         padding: 20px;
+         border-radius: 8px;
+         box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+         z-index: 101;
+       
+}
+
+
+.fechar{
+         text-align: center;
+         width: 100%;
+         max-width: 80px;
+         padding: 15px;
+         padding-top:0px;
+         height: 30px;
+         color: white;
+         border: 1px solid white;
+         border-radius: 12px;
+         background-color: #ff4545;
+         margin: 10px auto;
+
+      
+         cursor: pointer;
+
+         padding: 5px;
+         height: 23px;
+  }
+
+   
+
+  .fechar p {
+   position: relative;
+   top: -12px; }
+
+
+
+
+
+   .containertable{
+
+            max-height: 80px;
+            overflow-y: auto;
+            width: 100%;
+            border-radius: 10px;
+   
+            padding: 10px;
+         
+        }
+        .containerfiltros{
+            max-height: 300px;
+            display: flex;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            background-color: #5a2323;
+            width: 100%;
+        }
+        .filtrossinlge{
+            margin: 0 auto;
+            width: 30%;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            border: 1px solid #ddd;
+            
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+            color: black;
+        }
+
+        th {
+            background-color: #f4f4f4;
+        }
+
+        button {
+          text-align: center;
+          margin: 0 auto;
+          
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        .agendarhorario{
+            background-color: #4CAF50;
+            text-align: center;
+            margin: 0 auto;
+        }
+        .botoes{
+          text-align: center;
+          width: 100%;
+   
+          margin: 0 auto;
+          padding-top: 20px;
+        }
+        .btn{
+          width: 200px;
+          margin: 0 auto;
+          margin-top: 20px;
+          color: black;
+          background-color: white;
+        }
+
+        .princiapl{
+          width: 100%;
+          padding: 20px;
+          margin: 0 auto;
+          text-align: center;
+        }
+      
+</style>
+
+
+
+  </head>
+
+
+
+  <div id="login" class="bgL" style="z-index: 51; display: initial; background-color: #000000d7;" >
+    <div class="bgconteudo2" style="z-index: 50; width: 400px; height: 200px;">
+
+        <p id="textotitulo" style="margin: 0 auto; text-align: center; width: 100%; color: #000;">Login</p>
+
+
+      
+        <p id="textotitulo" style="margin: 0 auto; text-align: center; width: 100%; color: #000; font-size:12px;"> área de administrador do sistema</p>
+
+
+        <div class="bgcontentt" style="position: relative; top: 0px; padding: 20px; text-align: center;">
+
+          <input type="text" id="user" placeholder="User">
+          <br>
+          <input style="margin-top: 20px;" type="text" id="senha" placeholder="Senha">
+
+          <br>
+          <button style="color: #252525; margin-top: 20px;" onclick="logar()">Logar</button>
+
+        </div>
+    </div>
+</div>
+
+  
+
+
+
+ 
+
+
+  <body>
+
+
+    <header class="main-header" style="position: fixed; z-index: 41; width: 100%;">
+      <div class="wrapper clearfix" >
+        <nav class="main-navigation" >
+          <ul>
+            <li>
+              <a href="#menu">Area do admin</a>
+            </li>
+           
+         
+          </ul>
+        </nav>
+        <div class="user-block">
+          <a class="login" href="#">Sair</a>
+        </div>
+      </div>
+    </header>
+
+
+
+    <main class="container" style="padding-top: 130px;" id="menu">
+        
+
+   <div class="princiapl">
+
+
+      <div class="containertitulo" id="trab" style="position: relative; left: -20px;">
+
+        <h2> Área do admin </h2>
+
+      </div>
+
+
+      <div id="btns"  class="botoes">
+        
+        <div class="btn" onclick="clientes()">Clientes</div>
+     <br>
+        <div class="btn" onclick="cortes()">Cortes</div>
+      
+        
+      </div>
+
+
+
+
+      <div class="containertable" id="cortes" style="display: none; margin: 0 auto; text-align: center;">
+        
+        <div onclick="voltar()" style="width: 80px; height: 30px; color: rgb(0, 0, 0); padding-top: 2px; cursor: pointer; background-color: white; border-radius: 12px;">
+     Voltar
+        </div>
+        <table id="dataTable" style="background-color: white;">
+            <thead>
+                <tr>
+                    <th>Horários</th>
+                    <th>Disponibilidade</th>
+                    <th style="width: 200px;">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Linhas serão adicionadas dinamicamente aqui -->
+            </tbody>
+        </table>
+    </div>
+
+
+
+
+
+    <div class="containertable" id="clientes" style="display: none; margin: 0 auto; text-align: center;">
+        
+      <div onclick="voltar()" style="width: 80px; height: 30px; color: rgb(0, 0, 0); padding-top: 2px; cursor: pointer; background-color: white; border-radius: 12px;">
+   Voltar
+      </div>
+      <table id="dataTablec" style="background-color: white;">
+          <thead>
+              <tr>
+                  <th>Nome</th>
+                  <th>Email</th>
+                  <th>Telefone</th>
+                
+              </tr>
+          </thead>
+          <tbody>
+              <!-- Linhas serão adicionadas dinamicamente aqui -->
+          </tbody>
+      </table>
+  </div>
+
+
+
+     
+</div>
+
+
+    </main>
+
+
+    <footer class="main-footer">
+      <div class="container clearfix">
+        <section class="footer-contacts">
+          Endereço:
+          <br>
+          Júri danilenko 2484 2° andar
+          <br>
+         
+          <br>
+          Telefone: +7 (812) 666-02-62 
+        </section>
+        <section class="footer-social">
+          <p>Siga a gente em todas as redes!</p>
+          <a class="social-btn social-btn-vk" href="#">ВКонтакте</a>
+          <a class="social-btn social-btn-fb" href="#">Фэйсбук</a>
+          <a class="social-btn social-btn-inst" href="#">Инстаграм</a>
+        </section>
+       
+      </div>
+    </footer>
+
+
+ 
+
+
+
+    <script>
+
+      function voltar(){
+        const bg1 = document.getElementById('clientes')
+    bg1.style.display = 'none'
+
+    const bg2 = document.getElementById('cortes')
+    bg2.style.display = 'none'
+
+
+    const bg3 = document.getElementById('btns')
+    bg3.style.display = 'initial'
+
+
+      }
+
+setTimeout(() => {
+  fazerRequisicaoGet()
+
+}, 3000);
+
+
+function clientes(){
+  const bg1 = document.getElementById('btns')
+    bg1.style.display = 'none'
+
+  const bg = document.getElementById('clientes')
+    bg.style.display = 'initial'
+
+    fazerRequisicaoGetClientes()
+}
+
+function cortes(){
+console.log('ds')
+  const bg1 = document.getElementById('btns')
+    bg1.style.display = 'none'
+
+  const bg = document.getElementById('cortes')
+    bg.style.display = 'initial'
+
+    
+      fazerRequisicaoGet()
+    
+}
+
+function logar(){
+  const senha = document.getElementById('senha').value
+  const user = document.getElementById('user').value
+  if(senha == '123' && user == 'admin'){
+    const bg = document.getElementById('login')
+    bg.style.display = 'none'
+  }
+}
+
+
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(event) {
+                event.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({ 
+                    behavior: 'smooth' 
+                });
+            });
+        })
+
+function redireciona(){
+
+  window.location.href = `https://wa.me/message/3K5ZU4AB3DHNG1`
+}
+let currentDay = new Date();
+
+function abrirmodal(id) {
+    const elemento = document.getElementById(id);
+    elemento.style.display = 'initial';
+    fazerRequisicaoGet();
+}
+
+function fecharmodal(id) {
+    const elemento = document.getElementById(id);
+    elemento.style.display = 'none';
+}
+
+
+horaglobal = null
+function abrirmodalcolocarnome(hora){
+  horaglobal = hora
+  console.log(horaglobal)
+  const elemento = document.getElementById('modalnome');
+    elemento.style.display = 'initial';
+}
+
+
+
+function fecharmodalnome(id){
+  const elemento = document.getElementById(id);
+    elemento.style.display = 'none';
+}
+
+
+function marcarhorario() {
+  const email = document.getElementById('email')
+  const nome = document.getElementById('nome')
+
+  console.log(horaglobal)
+
+
+    const mes = String(currentDay.getMonth() + 1).padStart(2, '0');
+    const dia = String(currentDay.getDate()).padStart(2, '0');
+    const url = `https://thtato-20e86-default-rtdb.firebaseio.com/meses/${mes}/dias/${dia}/horarios/${horaglobal}.json`;
+
+    fetch(url, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ disponibilidade: false })
+    }).then(response => response.json())
+      .then(data => {
+          console.log('Horário atualizado:', data);
+          const elemento = document.getElementById('modalnome');
+    elemento.style.display = 'none';
+          fazerRequisicaoGet();
+      });
+}
+
+
+
+function fazerRequisicaoGetClientes() {
+
+    const url = `https://thtato-20e86-default-rtdb.firebaseio.com/clientes.json`;
+
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+          console.log(data)
+            if (data) {
+
+                populateTablec(data);
+            }
+        });
+}
+
+
+
+function fazerRequisicaoGet() {
+    const mes = String(currentDay.getMonth() + 1).padStart(2, '0');
+    const dia = String(currentDay.getDate()).padStart(2, '0');
+    const url = `https://thtato-20e86-default-rtdb.firebaseio.com/meses/${mes}/dias/${dia}.json`;
+
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            if (data && data.horarios) {
+                document.getElementById('textotitulo').innerText = `Horários de ${data.diadasemana}, ${data.data}`;
+                document.getElementById('textotitulo').style.color = 'black'
+                populateTable(data.horarios);
+            }
+        });
+}
+
+
+function populateTablec(data) {
+    const tbody = document.querySelector('#dataTablec tbody');
+    tbody.innerHTML = '';
+
+    for (const i in data) {
+        const tr = document.createElement('tr');
+   const usuario = data[i]
+
+
+
+              
+   const disponibilidadeTd = document.createElement('td');
+        disponibilidadeTd.textContent =  usuario.nome
+
+        tr.appendChild(disponibilidadeTd);
+
+
+        const horarioTd = document.createElement('td');
+        horarioTd.textContent = usuario.email;
+        tr.appendChild(horarioTd);
+
+
+
+        const disponibilidadeTd2 = document.createElement('td');
+        disponibilidadeTd2.textContent =  usuario.Telefone
+
+        tr.appendChild(disponibilidadeTd2);
+
+
+        // if (data.disponibilidade) {
+        //     const btn = createButtonc('Agendar', hora);
+        //     btn.classList.add('agendarhorario');
+        //     actionTd.appendChild(btn);
+        // } else {
+        //     const pIndisponivel = document.createElement('p');
+        //     pIndisponivel.textContent = 'Horário indisponível';
+        //     pIndisponivel.style = 'color: red; text-align: center';
+        //     actionTd.appendChild(pIndisponivel);
+        // }
+
+
+        tbody.appendChild(tr);
+    }
+}
+
+function createButtonc(text, hora) {
+    const button = document.createElement('button');
+    button.textContent = text;
+    button.addEventListener('click', () => abrirmodalcolocarnome(hora));
+    return button;
+}
+
+
+
+function populateTable(horarios) {
+    const tbody = document.querySelector('#dataTable tbody');
+    tbody.innerHTML = '';
+
+    for (const hora in horarios) {
+        const tr = document.createElement('tr');
+
+        const horarioTd = document.createElement('td');
+        horarioTd.textContent = hora;
+        tr.appendChild(horarioTd);
+
+        const disponibilidadeTd = document.createElement('td');
+        disponibilidadeTd.textContent = horarios[hora].disponibilidade ? 'Disponível' : 'Indisponível';
+        tr.appendChild(disponibilidadeTd);
+
+        const actionTd = document.createElement('td');
+        actionTd.style.textAlign = 'Center';
+
+        if (horarios[hora].disponibilidade) {
+            const btn = createButton('Agendar', hora);
+            btn.classList.add('agendarhorario');
+            actionTd.appendChild(btn);
+        } else {
+            const pIndisponivel = document.createElement('p');
+            pIndisponivel.textContent = 'Horário indisponível';
+            pIndisponivel.style = 'color: red; text-align: center';
+            actionTd.appendChild(pIndisponivel);
+        }
+
+        tr.appendChild(actionTd);
+        tbody.appendChild(tr);
+    }
+}
+
+function createButton(text, hora) {
+    const button = document.createElement('button');
+    button.textContent = text;
+    button.addEventListener('click', () => abrirmodalcolocarnome(hora));
+    return button;
+}
+
+function mudarDia(incremento) {
+    currentDay.setDate(currentDay.getDate() + incremento);
+    fazerRequisicaoGet();
+    atualizarDataAtual();
+}
+
+function atualizarDataAtual() {
+    const dataOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    const dataFormatada = currentDay.toLocaleDateString('pt-BR', dataOptions);
+    document.getElementById('dataAtual').innerText = dataFormatada;
+}
+
+document.getElementById('anterior').addEventListener('click', () => mudarDia(-1));
+document.getElementById('proximo').addEventListener('click', () => mudarDia(1));
+
+// Inicializa a data exibida ao abrir o modal
+atualizarDataAtual();
+
+    function handleAction(id, action) {
+        console.log(id, action)
+        if(action == 'Agendar'){
+            update(id)
+        }
+       
+      
+    }
+
+
+    </script>
+
+
+  </body>
+</html>

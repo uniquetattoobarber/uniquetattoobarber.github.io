@@ -1,0 +1,1422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatórios migração</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        /* styles.css */
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f2f2f2;
+            overflow-x: hidden;
+        }
+        .chart-container {
+            width: 70%;
+            margin: 10px auto;
+        }
+        canvas {
+            display: block;
+        }
+
+        .container {
+            max-height: 1000px;
+           
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            background-color: #fff;
+        }
+
+        .containertable{
+            max-height: 480px;
+            overflow-y: auto;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            background-color: #fff;
+        }
+        .containerfiltros{
+            max-height: 300px;
+            display: flex;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            background-color: #5a2323;
+            width: 100%;
+        }
+        .filtrossinlge{
+            margin: 0 auto;
+            width: 30%;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f4f4f4;
+        }
+
+        button {
+            margin-right: 5px;
+          
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        .btnvalidar{
+            background-color: #4CAF50;
+        }
+        .btnerro{
+            background-color: #d51212;
+            
+        }
+        .btnvalidarcliente{
+            background-color: #4CAF50;
+        }
+        .btnvalidaalertas{
+            background-color: #2934899f;
+        }
+        .btnresol{
+            background-color: #a89716de;
+            
+        }
+        .btnvalidar:hover {
+            background-color: #53c25c;
+        
+        }
+        .btnerro:hover{
+            background-color: #d51212;
+            
+        }
+
+        input {
+         padding: 10px;
+         margin-bottom: 10px;
+         border: 1px solid #ccc;
+         border-radius: 5px;
+         font-size: 14px;
+         box-sizing: border-box;
+         width: 100%;
+      }
+
+        .Total { 
+            width: 100%;
+           
+            font-size: 13px;
+            font-weight: bold;
+            margin-top: 2px;
+        }
+
+        
+      .tarefasconcluidas p {
+         color: white;
+          font-family: 'Arial', sans-serif;
+      }
+        .tarefasconcluidas span {
+         color: white;
+          font-family: 'Arial', sans-serif;
+      }
+.titulop{
+    text-align: center;
+    margin: 0 auto;
+    margin-bottom: 40px;
+}
+.metricasrelat{
+   
+    width: 100%; 
+    padding: 1px;
+ 
+}
+.metricasrelat p{
+    font-size: 13px;
+}
+td.actions {
+    text-align: left;
+    background-color: #ffffff; /* Branco */
+}
+.fechar{
+         text-align: center;
+         width: 100%;
+         max-width: 150px;
+         padding: 15px;
+         padding-top:0px;
+         height: 30px;
+         color: white;
+         border: 1px solid white;
+         border-radius: 12px;
+         background-color: #ff4545;
+         margin: 10px auto;
+
+      
+         cursor: pointer;
+
+         padding: 5px;
+         height: 23px;
+  }
+
+     .fechar2{
+         text-align: center;
+         width: 100%;
+         max-width: 150px;
+     
+         padding-top:0px;
+         height: 30px;
+         color: white;
+         border: 1px solid white;
+         border-radius: 12px;
+         background-color: rgb(66, 190, 66);
+         margin: 0 auto;
+           margin-top: 70px;
+         cursor: pointer;
+
+         padding: 5px;
+         height: 23px;
+        
+  }
+
+  .fechar p {
+   position: relative;
+   top: -12px;
+  }
+  .fechar2 p {
+   position: relative;
+   top: -12px;
+  }
+
+
+.bgL{
+      display: none;
+         position: fixed;
+         top: 0;
+         left: 0;
+         width: 100%;
+         height: 100%;
+         background-color: rgba(0, 0, 0, 0.5); /* Fundo escuro semi-transparente */
+         justify-content: center;
+         align-items: center;
+         z-index: 100;
+}
+.bgconteudo{
+         width: 350px;
+         height: 100%;
+         max-height: 380px;
+         
+         margin: 50px auto;
+         background-color: #fff;
+         padding: 20px;
+         border-radius: 8px;
+         box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+       
+}
+.bgconteudo2{
+         width: 1050px;
+         height: 100%;
+         max-height: 500px;
+         
+         margin: 50px auto;
+         background-color: #fff;
+         padding: 20px;
+         border-radius: 8px;
+         box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+       
+}
+
+
+.custom-checkbox {
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 16px; /* Tamanho da fonte menor */
+    user-select: none;
+}
+
+.custom-checkbox input {
+    position: relative;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+    padding-top: 30px;
+    margin-bottom: 20px;
+}
+
+.custom-checkbox span {
+    position: relative;
+    padding-left: 10px;
+    padding-top: 3px; /* Espaçamento entre o checkbox e o texto */
+}
+
+.custom-checkbox span::before {
+    content: "";
+    position: absolute;
+    left: -30px; /* Ajuste do espaçamento à esquerda do span */
+    top: -2px; /* Ajuste vertical para alinhar melhor com o texto */
+    width: 20px; /* Tamanho menor do checkbox */
+    height: 20px; /* Tamanho menor do checkbox */
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    background-color: white;
+}
+
+.custom-checkbox input:checked ~ span::before {
+    background-color: #2196F3;
+}
+
+.custom-checkbox span::after {
+    content: "";
+    position: absolute;
+    left: -23px; /* Ajuste do espaçamento à esquerda do span */
+    top: 3px; /* Ajuste vertical para alinhar melhor com o texto */
+    width: 7px; /* Tamanho menor da marca de seleção */
+    height: 12px; /* Tamanho menor da marca de seleção */
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+    display: none;
+}
+
+.custom-checkbox input:checked ~ span::after {
+    display: block;
+}
+.bgcheck{
+    margin-left: 25px;
+    margin-bottom: 20px;
+}
+
+
+.metricas{
+  
+    padding: 4px;
+    cursor: pointer;
+    transition: .1s;
+    background-color: rgba(0, 81, 255, 0.524);
+    border-radius: 10px;    
+    max-width: 170px;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+
+
+}
+.metricas:hover{
+    background-color: rgba(0, 81, 255, 0.223);
+}
+.metricas p{
+    color: white;
+    text-decoration: none;
+}
+.graficoestatico{
+    position: relative;
+    top: -200px;
+    left: 320px;
+}
+    </style>
+</head>
+<body>
+
+    <div id="RlResolve" class="bgL">
+  
+        <div class="bgconteudo">
+     
+              <div class="bgcontentt">
+
+            <!--   <input type="textarea"  placeholder="Resposta da dúvida" style="height: 100px;" rows="10" cols="50"> -->
+            <p id="descerro" class="Total">Descrição do erro </p>
+     
+            <p>Descrição detalhada da resolução:</p>
+            <textarea id="dsrs" style="resize: none; border-radius: 5px;" rows="6" cols="42">                  
+            </textarea>
+                              <!--   <input type="textarea"  placeholder="Resposta da dúvida" style="height: 100px;" rows="10" cols="50"> -->
+    
+              
+              <div class="fechar2" onclick="Resolver()">
+                  <p>Salvar</p>
+     
+               </div>
+     
+               <div class="fechar" onclick="fechar2()">
+                  <p>cancelar</p>
+     
+               </div>
+     
+     
+              </div>   
+            
+     
+            
+        </div>
+     </div>
+     
+
+
+    <div id="RlErro" class="bgL">
+  
+        <div class="bgconteudo">
+     
+              <div class="bgcontentt">
+                       
+              <p>Descrição detalhada do erro:</p>
+              <textarea id="dse" style="resize: none; border-radius: 5px;" rows="6" cols="42">                  
+              </textarea>
+    
+                      
+                           
+              <div class="fechar2" onclick="erro()">
+                  <p>Salvar</p>
+     
+               </div>
+     
+               <div class="fechar" onclick="fechar1()">
+                  <p>cancelar</p>
+     
+               </div>
+     
+     
+              </div>   
+            
+     
+            
+        </div>
+     </div>
+     
+
+     <div id="modalgraficos" class="bgL">
+  
+        <div class="bgconteudo2">
+            <div style="position: relative; left: 480px; top: -40px; margin-bottom: 0;" class="fechar" onclick="fecharmodalgrficos()">
+                <p>X</p>
+   
+             </div>
+
+             <p id="textotitulo" style="margin: 0 auto; text-align: center; width: 100%;"></p>
+
+
+             <div style="cursor: pointer;  position: relative; left: 1010px;  top: 120px; font-size: 70px; border-radius: 100px; height: 80px; border: 1px solid rgba(0, 132, 255, 1); background-color: rgba(0, 132, 255, 0.518); width: 90px;" onclick="renderizargraficos()" >
+                <p style="color: #000f58; text-align: center; padding-left: 30px; position: relative; top: -70px;"> > </p>
+             </div>
+
+
+
+              <div class="bgcontentt" style="position: relative; top: 0px;">  
+            
+                <div class="chart-container">
+                    <canvas id="totalRelatoriosChart"></canvas>
+                </div>
+            
+           
+              </div>   
+            
+     
+            
+        </div>
+     </div>
+     
+
+
+
+
+    <h1 class="titulop"> Gestão de relatórios para migração HTML5</h1>
+    <div class="container">
+     
+              
+        <div class="metricas" onclick="abrirmodalgraficos()">
+
+        <p>Vizualizar métricas</p>
+
+        </div>
+
+
+
+
+        <div class="metricasrelat" style="font-size: 10px;">
+
+            <p id="Total" class="Total"></p>
+       
+
+            <p id="Totalesp" class="Total"></p>
+
+            <p id="Totalvalsf" class="Total"></p>
+
+            <p id="Totalval" class="Total"></p>
+           
+          
+           
+            <p id="Totalvalc" class="Total"></p>
+       
+            <p id="totalalertas" class="Total"></p>
+       
+            
+            <p id="Totalpendentes" class="Total">Total de relatórios pendentes: 0</p>
+        </div>
+
+     
+
+       
+        <div class="graficoestatico">
+
+            <canvas id="myChart"></canvas>
+        
+        </div>
+       
+
+
+
+        <div style="position: relative; top: -150px;"> 
+            <!--
+        <input type="text" id="pesquisa" placeholder="Pesquisar por titulo do relatório, código ou classificação">
+        -->
+        <div class="bgcheck">
+        <label class="custom-checkbox">
+            <input type="checkbox" id="checkbox1" name="Todos os relatórios">
+            <span>Todos os relatórios</span>
+        </label><br>
+        <label class="custom-checkbox">
+            <input type="checkbox" id="checkbox2" name="Relatórios importantes">
+            <span>Relatórios importantes</span>
+        </label>
+        </div>
+
+<div class="containertable">
+        <table id="dataTable">
+            <thead>
+                <tr>
+                    <th>Cód class relatorio</th>
+                    <th>Cód relatório</th>
+                    <th>Título</th> 
+                   
+                    <th style="width: 200px;">Ações</th>
+                    <th>Alertas</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Linhas serão adicionadas dinamicamente aqui -->
+            </tbody>
+        </table>
+    </div>
+</div>
+    </div>
+
+    <script>
+
+var dataglobal = null
+
+
+const checkbox1 = document.getElementById('checkbox1');
+    const checkbox2 = document.getElementById('checkbox2');
+    checkbox1.addEventListener('change', function() {
+    if (this.checked) {
+        checkbox2.checked = false;
+        fazerRequisicaoGet(); // Adicione isso para atualizar os dados
+    }
+});
+    
+    checkbox2.addEventListener('change', function() {
+        if (this.checked) {
+            const lista = []
+            checkbox1.checked = false;
+            
+         for (var id in dataglobal) {
+
+            var relatorio = dataglobal[id];
+
+
+            var ndescr = relatorio.importancia
+           
+            if (ndescr) {
+                lista.push(dataglobal[id])
+            }
+         
+        
+            }
+            populateTable(lista)
+        
+        }
+    });
+
+
+
+// setInterval(() => {
+//    pesquisarportitulo()
+// }, "1000");
+ 
+
+
+
+
+function pesquisarportitulo(){
+   var pesquisa = document.getElementById('pesquisa').value
+   var np = `${pesquisa}`
+    
+
+   
+
+   if(np == ""){
+    if (checkbox2.checked) {
+            const lista = []
+            checkbox1.checked = false;
+            
+         for (var id in dataglobal) {
+
+            var relatorio = dataglobal[id];
+
+
+            var ndescr = relatorio.importancia
+           
+            if (ndescr) {
+                lista.push(dataglobal[id])
+            }
+         
+        
+            }
+            populateTable(lista)
+        
+        }else{
+              fazerRequisicaoGet()
+        }
+    
+   }else{
+    
+    var o = dd(np)
+
+    //  var n = deixarMinusculoSemAcentos(np)
+d(o)
+    //      exibirTarefaspesquisa(o)
+   
+      
+   }
+}
+
+function d(o){
+    console.log(o)
+    
+         const lista = []
+     
+        // console.log(dataglobal)
+    
+          for (var id in dataglobal) {
+
+             var relatorio = dataglobal[id];
+               // console.log(relatorio)
+    
+            var ndescr = relatorio.DS_TITULO;
+             var cdrelat = String(relatorio.CD_RELATORIO);
+             var classrelat = relatorio.CD_CLASSIF_RELAT;
+
+             //var descr = dd(ndescr)
+
+            if(ndescr.includes(o) || cdrelat.includes(o) || classrelat.includes(o)){
+              
+               lista.push(dataglobal[id])
+             }else{
+                //console.log("sem reultados")
+             }
+            
+          }
+             
+
+         if (!lista.length) {
+            fazerRequisicaoGet()
+         } else {
+            populateTable(lista)
+         }
+}
+
+
+
+function exibirTarefaspesquisa(o){
+  
+        
+      }
+
+
+
+
+
+
+
+function removerAcentos(texto) {
+
+        var tev = texto.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        return tev
+ 
+}
+
+function dd(texto) {
+
+    return removerAcentos(texto).toLowerCase();
+
+}
+
+
+
+
+
+
+
+     var clicada = null
+    // script.js
+    fazerRequisicaoGet()
+
+  
+    var total = 0
+
+//https://novobancodados-default-rtdb.firebaseio.com
+    
+    function fazerRequisicaoGet() {
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'https://novobancodados-default-rtdb.firebaseio.com/relatorios3.json', true);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                const relatorios = JSON.parse(xhr.responseText);
+               
+                populateTable(relatorios);
+                graficoperiodo()
+            }
+        };
+        xhr.send();
+    }
+
+
+    //console.log(data)
+    let totalValidados = 0;
+        let Totalvalsf = 0;
+        let Totalespe = 0;
+        let Totalvalsc = 0;
+       
+        let totalalertas = 0
+        let totalComErro = 0;
+        let alertaspendentes = 0
+
+    function populateTable(data) {
+        var total = 0
+    //console.log(data)
+         totalValidados = 0;
+         Totalvalsf = 0;
+         Totalespe = 0;
+         Totalvalsc = 0;
+
+         alertaspendentes = 0;
+         
+         totalalertas = 0
+    
+     totalComErro = 0;
+
+        const tbody = document.querySelector('#dataTable tbody');
+        tbody.innerHTML = '';
+
+        dataglobal = data
+    
+       
+        for (var id in data) {
+            total = total + 1
+            document.getElementById('Total').innerText = ` Total de relatórios: ${total}`
+            var relatorio = data[id];
+            //console.log(relatorio)
+            const tr = document.createElement('tr');
+
+            const tdCodClassRelatorio = document.createElement('td');
+            tdCodClassRelatorio.textContent = relatorio.CD_CLASSIF_RELAT  || 'N/A';
+            tr.appendChild(tdCodClassRelatorio);
+
+            const tdCodRelatorio = document.createElement('td');
+            tdCodRelatorio.textContent = relatorio.CD_RELATORIO  || 'N/A';
+            tr.appendChild(tdCodRelatorio);
+
+            const tdTitulo = document.createElement('td');
+            tdTitulo.textContent = relatorio.DS_TITULO  || 'N/A';
+            tr.appendChild(tdTitulo);
+
+
+            //console.log(relatorio.validadonafuncao)
+
+            const nactionTd = document.createElement('td');
+            nactionTd.style.textAlign = 'Center'
+            nactionTd.style.backgroundColor = 'white'
+
+
+if (relatorio.alertasresolvidos === true) {
+
+    const pValidado = document.createElement('p');
+    pValidado.textContent = 'Alertas Validados';
+    pValidado.style = 'color: blue; text-align: center'
+    nactionTd.appendChild(pValidado);
+    nactionTd.classList.add('actions');
+    totalalertas++;
+
+}else{
+    alertaspendentes++;
+const btn1 = createButton('Validar Alertas', id);
+btn1.classList.add('btnvalidaalertas');
+nactionTd.appendChild(btn1);
+
+}
+
+
+
+
+
+
+            const actionTd = document.createElement('td');
+          
+            tr.appendChild(actionTd);
+
+            if (relatorio.importancia === true) {
+                tr.style.backgroundColor = '#ffef85' ;            
+            }
+       
+            if(relatorio.validadopelocliente === true){
+               
+              tr.style.backgroundColor = '#85ff9f'; // Verde
+              
+                Totalvalsc++;
+            
+              
+                const pValidado = document.createElement('p');
+                pValidado.textContent = 'Validado';
+                pValidado.style = 'color: green; text-align: center'
+                actionTd.appendChild(pValidado);
+                actionTd.classList.add('actions');
+
+           }
+           else if(relatorio.validadonafuncao === true){
+               //  tr.style.backgroundColor = '#ed828a' ; // Vermelho
+               Totalvalsf++;
+               const btn1 = createButton('Validação do cliente', id);
+           //   const btn2 = createButton('Relatar erro função', id);
+//
+              btn1.classList.add('btnvalidarcliente');
+             // btn2.classList.add('btnerro');
+
+              actionTd.appendChild(btn1);
+            //  actionTd.appendChild(btn2);
+          //adicionando botao paravizualizar
+
+           }
+         else  if (relatorio.Validado === true) {
+
+            totalValidados++;
+            //  tr.style.backgroundColor = '#ed828a' ; // Vermelho
+
+            const btn1 = createButton('Validar na função', id);
+           //   const btn2 = createButton('Relatar erro função', id);
+//
+              btn1.classList.add('btnvalidar');
+             // btn2.classList.add('btnerro');
+
+              actionTd.appendChild(btn1);
+            //  actionTd.appendChild(btn2);
+          //adicionando botao paravizualizar
+            
+          }   
+            else if (relatorio.Erro === true) {
+                tr.style.backgroundColor = '#ed828a' ; // Vermelho
+                totalComErro++;
+                const btnerro = createButton('Resolver', id);
+                btnerro.classList.add('btnresol'); //btnvalidar
+                actionTd.appendChild(btnerro);
+           
+
+            }else{
+                Totalespe++;
+            const btn1 = createButton('Validar', id);
+            const btn2 = createButton('Relatar erro', id);
+
+            btn1.classList.add('btnvalidar');
+            btn2.classList.add('btnerro');
+
+            actionTd.appendChild(btn1);
+            actionTd.appendChild(btn2);
+            }
+
+
+
+         
+
+            tr.appendChild(nactionTd);
+            tbody.appendChild(tr);
+          
+
+
+            document.getElementById('Totalvalsf').textContent = `Total de relatórios validados (Está gerando): ${totalValidados}`;
+            
+    document.getElementById('Totalesp').textContent = `Total de relatórios com erro: ${totalComErro}`;
+
+    document.getElementById('Total').textContent = `Total de relatórios: ${total}`;
+
+    document.getElementById('Totalpendentes').textContent = `Total de relatórios pendentes: ${Totalespe}`;
+    
+    document.getElementById('Totalval').textContent = `Total de relatórios validados na função (Dentro do processo): ${Totalvalsf}`;
+    
+
+    document.getElementById('Totalvalc').textContent = `Total de relatórios validados pelo cliente (Validação final): ${Totalvalsc}`;
+
+    document.getElementById('totalalertas').textContent = `Total de relatórios com alertas resolvidos (Alertas ao consistir Java): ${totalalertas}`;
+
+    
+        }
+    }
+
+    function createButton(text, id) {
+        const button = document.createElement('button');
+        button.textContent = text;
+        button.addEventListener('click', () => handleAction(id, text));
+        return button;
+    }
+
+    function handleAction(id, action) {
+        console.log(id, action)
+        if(action == 'Validar'){
+            update(id)
+        } else if(action == 'Relatar erro'){
+            erromodal(id)
+        }    else if(action == 'Resolver'){
+            Resolvermodal(id)
+        }else if (action == 'Validar na função'){
+            
+            validarfuncao(id)
+
+        }
+        else if (action == 'Validar Alertas'){
+            
+            validaralertas(id)
+
+        }
+        else if (action == 'Validação do cliente'){
+            
+            validadopelocliente(id)
+
+        }
+       
+      
+    }
+
+    function Resolvermodal(id){
+        abrirmodalresolver(id)
+    
+    }
+    function erromodal(id){
+        abrirmodalrelatarr(id)
+    }
+
+
+    
+
+    var clicadafalsa = null
+
+function abrirmodalresolver(id){
+    console.log('dsds')
+    console.log(id)
+    clicadafalsa = getbyid(id)
+ 
+    clicada = id
+
+   const erro = document.getElementById('RlResolve') 
+   erro.style.display = 'initial'
+
+   setTimeout(() => {
+    console.log(clicadafalsa)
+    const descerro = document.getElementById('descerro')
+        descerro.textContent = `${clicadafalsa.DsErro}`
+   }, "2000");
+
+}
+
+
+function abrirmodalrelatarr(id){
+  
+    clicada = id
+    const ResolverErro = document.getElementById('RlErro') 
+    ResolverErro.style.display = 'initial'
+}
+
+function abrirmodalgraficos(){
+  const ResolverErro = document.getElementById('modalgraficos') 
+  ResolverErro.style.display = 'initial'
+    
+  setTimeout(() => {
+    renderizargraficos()
+  }, '2000');
+
+    
+}
+
+function fecharmodalgrficos(){
+    const ResolverErro = document.getElementById('modalgraficos') 
+  ResolverErro.style.display = 'none'
+}
+
+
+
+
+
+
+function getbyid(tarefaIdd) {
+    console.log(tarefaIdd)
+        var xhr = new XMLHttpRequest();
+        var url = `https://novobancodados-default-rtdb.firebaseio.com/relatorios3/${tarefaIdd}.json`;
+ 
+        xhr.open('GET', url, true);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                clicadafalsa = JSON.parse(xhr.responseText);
+                
+            }
+        };
+        xhr.send();
+    }
+
+
+
+
+    function validarfuncao(clicada) {
+        const tarefaId = clicada
+       
+        var xhr = new XMLHttpRequest();
+        var url = `https://novobancodados-default-rtdb.firebaseio.com/relatorios3/${tarefaId}.json`;
+
+        xhr.open('PATCH', url, true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4) {
+                if (xhr.status == 200) {
+                    console.log('Tarefa marcada como coddsffsdncluída com sucesso!');
+
+                    setTimeout(function() {
+                        fazerRequisicaoGet();
+                    }, 1000);
+                } else {
+                    console.error('Erro ao marcar como concluída:', xhr.status, xhr.statusText);
+                }
+            }
+        };
+
+
+        xhr.send(JSON.stringify({ validadonafuncao: true,}));
+
+        
+    }
+
+    
+    
+    function validaralertas(clicada) {
+        const tarefaId = clicada
+       
+        var xhr = new XMLHttpRequest();
+        var url = `https://novobancodados-default-rtdb.firebaseio.com/relatorios3/${tarefaId}.json`;
+
+        xhr.open('PATCH', url, true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4) {
+                if (xhr.status == 200) {
+                    console.log('Tarefa marcada como coddsffsdncluída com sucesso!');
+
+                    setTimeout(function() {
+                        fazerRequisicaoGet();
+                    }, 1000);
+                } else {
+                    console.error('Erro ao marcar como concluída:', xhr.status, xhr.statusText);
+                }
+            }
+        };
+
+
+        xhr.send(JSON.stringify({ alertasresolvidos: true,}));
+
+        
+    }
+
+
+    function validadopelocliente(clicada) {
+        const tarefaId = clicada
+       
+        var xhr = new XMLHttpRequest();
+        var url = `https://novobancodados-default-rtdb.firebaseio.com/relatorios3/${tarefaId}.json`;
+
+        xhr.open('PATCH', url, true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4) {
+                if (xhr.status == 200) {
+                    console.log('Tarefa marcada como coddsffsdncluída com sucesso!');
+
+                    setTimeout(function() {
+                        fazerRequisicaoGet();
+                    }, 1000);
+                } else {
+                    console.error('Erro ao marcar como concluída:', xhr.status, xhr.statusText);
+                }
+            }
+        };
+
+
+        xhr.send(JSON.stringify({ validadopelocliente: true,}));
+
+        
+    }
+
+    
+    function Resolver() {
+        const tarefaId = clicada
+        console.log(tarefaId)
+        var xhr = new XMLHttpRequest();
+        var url = `https://novobancodados-default-rtdb.firebaseio.com/relatorios3/${tarefaId}.json`;
+
+        xhr.open('PATCH', url, true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4) {
+                if (xhr.status == 200) {
+                    console.log('Tarefa marcada como concluída com sucesso!');
+
+                    setTimeout(function() {
+                        fazerRequisicaoGet();
+                    }, 1000);
+                } else {
+                    console.error('Erro ao marcar como concluída:', xhr.status, xhr.statusText);
+                }
+            }
+        };
+        var dataConclusao = new Date().toISOString();
+
+            // Converter a data para um objeto Date
+            var dataObj = new Date(dataConclusao);
+
+            // Extrair o dia, mês e ano do objeto Date
+            var dia = dataObj.getUTCDate().toString().padStart(2, '0');
+            var mes = (dataObj.getUTCMonth() + 1).toString().padStart(2, '0'); // Os meses em JavaScript são baseados em zero
+            var ano = dataObj.getUTCFullYear();
+
+            // Formatar a data no formato desejado
+            var dataFormatada = `${dia}/${mes}/${ano}`;
+
+            console.log(dataFormatada);
+            //validadonafuncao: true,   
+        xhr.send(JSON.stringify({ Erro: false, Validado: true, Dataresoluçãodoerro: `${dataFormatada}`, Resolucao:`${document.getElementById('dsrs').value}`}));
+
+     
+
+        const erro = document.getElementById('RlResolve') 
+   erro.style.display = 'none'
+    }
+
+
+    function erro() {
+        const tarefaId = clicada
+        console.log(tarefaId)
+        var xhr = new XMLHttpRequest();
+        var url = `https://novobancodados-default-rtdb.firebaseio.com/relatorios3/${tarefaId}.json`;
+
+        xhr.open('PATCH', url, true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4) {
+                if (xhr.status == 200) {
+                    console.log('Tarefa marcada como concluída com sucesso!');
+
+                    setTimeout(function() {
+                        fazerRequisicaoGet();
+                    }, 1000);
+                } else {
+                    console.error('Erro ao marcar como concluída:', xhr.status, xhr.statusText);
+                }
+            }
+            const erro = document.getElementById('RlErro') 
+   erro.style.display = 'none'
+        };
+
+        var dataConclusao = new Date().toISOString();
+        xhr.send(JSON.stringify({ Erro: true, DsErro: `${document.getElementById('dse').value}`}));
+    }
+
+    function update(tarefaId) {
+        var xhr = new XMLHttpRequest();
+        var url = `https://novobancodados-default-rtdb.firebaseio.com/relatorios3/${tarefaId}.json`;
+
+        xhr.open('PATCH', url, true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4) {
+                if (xhr.status == 200) {
+                    console.log('Tarefa marcada como concluída com sucesso!');
+
+                    setTimeout(function() {
+                        fazerRequisicaoGet();
+                    }, 1000);
+                } else {
+                    console.error('Erro ao marcar como concluída:', xhr.status, xhr.statusText);
+                }
+            }
+        };
+
+        var dataConclusao = new Date().toISOString();
+        xhr.send(JSON.stringify({ Validado: true}));
+    }
+
+    function fechar1(){
+       const erro = document.getElementById('RlErro') 
+       erro.style.display = 'none'
+    }
+
+    function fechar2(){
+       const erro = document.getElementById('RlResolve') 
+       erro.style.display = 'none'
+    }
+
+
+
+
+
+    let graficoatal = 0;
+    let totalRelatoriosChart = null;
+
+
+  
+
+
+
+    function renderizargraficos(){
+        const totalDeRelatoriosValidados = totalValidados;
+    const totalComErro2 = totalComErro; // Supondo que 'totalComErro' já está definido
+     // Supondo que 'total' já está definido
+    const totalPendentes = Totalespe; // Supondo que 'Totalespe' já está definido
+    const totalValidadoNaFuncao = Totalvalsf; // Supondo que 'Totalvalsf' já está definido
+    const totalValidadoPeloCliente = Totalvalsc; // Supondo que 'Totalvalsc' já está definido
+    const totalAlertasResolvidos = totalalertas; // Supondo que 'totalalertas' já está definido
+
+
+        console.log(graficoatal);
+
+// Destrói o gráfico anterior, se existir
+if (totalRelatoriosChart !== null) {
+    totalRelatoriosChart.destroy();
+}
+
+if (graficoatal === 0) {
+    // Dados e configuração do gráfico de relatórios
+    const totalRelatoriosData = {
+        labels: ['Relatórios com Erro', 'Relatórios Validados (Gerando)', 'Relatórios Validados na Função', 'Relatórios Validados pelo Cliente', 'Relatórios com Alertas Resolvidos', 'Relatórios Pendentes'],
+        datasets: [{
+            label: 'Total de Relatórios',
+            data: [totalComErro2, totalDeRelatoriosValidados, totalValidadoNaFuncao, totalValidadoPeloCliente, totalAlertasResolvidos, totalPendentes],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    };
+
+    const totalRelatoriosConfig = {
+        type: 'bar',
+        data: totalRelatoriosData,
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    };
+
+    totalRelatoriosChart = new Chart(
+        document.getElementById('totalRelatoriosChart'),
+        totalRelatoriosConfig
+    );
+
+         const texto = document.getElementById('textotitulo');
+    texto.textContent = 'Relação Total de Relatórios'
+
+} else if (graficoatal === 1) {
+    // Dados e configuração do gráfico de validação
+    const validacaoData = {
+        labels: ['Relatórios Validados (Gerando)', 'Relatórios Validados na Função', 'Relatórios Validados pelo Cliente'],
+        datasets: [{
+            label: 'Validação dos Relatórios',
+            data: [totalDeRelatoriosValidados, totalValidadoNaFuncao, totalValidadoPeloCliente],
+            backgroundColor: [
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(255, 99, 132, 0.2)'
+            ],
+            borderColor: [
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(255, 99, 132, 1)'
+            ],
+            borderWidth: 1
+        }]
+    };
+
+    const validacaoConfig = {
+        type: 'pie',
+        data: validacaoData,
+    };
+
+    totalRelatoriosChart = new Chart(
+        document.getElementById('totalRelatoriosChart'),
+        validacaoConfig
+    );
+
+        const texto = document.getElementById('textotitulo');
+    texto.textContent = 'Relação Relatórios validados X Relatórios validados na função X Relatórios Validados pelo cliente'
+
+
+} else if (graficoatal === 2) {
+    // Dados e configuração do gráfico de alertas
+    const alertasData = {
+        labels: ['Alertas Resolvidos', 'Alertas Pendentes'],
+        datasets: [{
+            label: 'Status dos Alertas',
+            data: [totalalertas, alertaspendentes],
+            backgroundColor: [
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 99, 132, 0.2)'
+            ],
+            borderColor: [
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 99, 132, 1)'
+            ],
+            borderWidth: 1
+        }]
+    };
+
+    const alertasConfig = {
+        type: 'doughnut',
+        data: alertasData,
+    };
+
+    totalRelatoriosChart = new Chart(
+        document.getElementById('totalRelatoriosChart'),
+        alertasConfig
+    );
+    const texto = document.getElementById('textotitulo');
+    texto.textContent = 'Relação Alertas resolvidos X alertas pendentes'
+
+}
+
+const canvas = document.getElementById('totalRelatoriosChart');
+        
+        // Defina o tamanho do canvas via JavaScript
+        canvas.style.width = '550px';  // Largura desejada
+        canvas.style.height = '300px'; // Altura desejada
+
+        canvas.style.margin = '0 auto'
+
+// Incrementa ou reseta o contador
+graficoatal = (graficoatal + 1) % 3;
+
+    }
+
+
+
+    function agruparDadosPorData(data) {
+    const agrupados = {};
+
+    for (var id in data) {
+        var item = data[id];
+        const date = item.Dataresoluçãodoerro;
+
+        // Ignorar itens com data vazia
+        if (date === "") continue;
+
+        if (!agrupados[date]) {
+            agrupados[date] = 0;
+        }
+
+        agrupados[date] += 1;
+    }
+
+    return agrupados;
+}
+
+let relatdiario = null
+
+function graficoperiodo() {
+
+    if (relatdiario !== null) {
+        relatdiario.destroy();
+}
+
+    setTimeout(() => {
+        const dadosAgrupados = agruparDadosPorData(dataglobal);
+
+        // Preparando os dados para o Chart.js
+        const labels = Object.keys(dadosAgrupados);
+        const valores = Object.values(dadosAgrupados);
+
+        // Configuração do gráfico
+        const config = {
+            type: 'line', // Alterado para 'line'
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Total erros resolvidos por dia (Relatórios validados)',
+                    data: valores,
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 1,
+                    fill: false // Desabilita o preenchimento abaixo da linha
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            },  
+        };
+
+        // Renderizando o gráfico
+        const ctx = document.getElementById('myChart').getContext('2d');
+        relatdiario = new Chart(ctx, config);
+
+
+        const canvas = document.getElementById('myChart');
+        
+        // Defina o tamanho do canvas via JavaScript
+        canvas.style.width = '550px';  // Largura desejada
+        canvas.style.height = '200px'; // Altura desejada
+
+        canvas.style.margin = '0 auto'
+
+        canvas.style.backgroundColor = 'rgba(54, 162, 235, 0.1)'
+        
+    }, 2000);
+}
+
+
+
+</script>
+
+</body>
+</html>
