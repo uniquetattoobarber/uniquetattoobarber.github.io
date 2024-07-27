@@ -851,6 +851,26 @@ input[type="checkbox"] {
               </div>
 
 
+              
+      <div class="containertable" id="cortes" >
+        
+        
+        <table id="dataTable" style="background-color: white;">
+            <thead>
+                <tr>
+                    <th>Horários</th>
+                    <th>Disponibilidade</th>
+                    <th style="width: 200px;">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Linhas serão adicionadas dinamicamente aqui -->
+            </tbody>
+        </table>
+    </div>
+
+
+
             </div>
     
         </div>
@@ -1247,7 +1267,7 @@ function fazerRequisicaoGet() {
 
 function populateTable(horarios) {
     const tbody = document.querySelector('#dataTable tbody');
-    //tbody.innerHTML = '';
+    tbody.innerHTML = '';
 
     for (const hora in horarios) {
         const tr = document.createElement('tr');
