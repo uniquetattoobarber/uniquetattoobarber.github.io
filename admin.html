@@ -964,6 +964,7 @@ input[type="checkbox"] {
                   <th>Nome</th>
                   <th>Email</th>
                   <th>Telefone</th>
+                  <th>Data de cadastro</th>
                 
               </tr>
           </thead>
@@ -1194,6 +1195,12 @@ function populateTablec(data) {
         tr.appendChild(disponibilidadeTd2);
 
 
+        const disponibilidadeTd3 = document.createElement('td');
+        disponibilidadeTd3.textContent =  usuario.data
+
+        tr.appendChild(disponibilidadeTd3);
+
+
         // if (data.disponibilidade) {
         //     const btn = createButtonc('Agendar', hora);
         //     btn.classList.add('agendarhorario');
@@ -1256,7 +1263,7 @@ function populateTable(horarios) {
         if (horarios[hora].disponibilidade) {
           const pIndisponivel = document.createElement('p');
             pIndisponivel.textContent = 'Horário livre';
-            pIndisponivel.style = 'color: yellow; text-align: center';
+            pIndisponivel.style = 'color: #c9c22c; text-align: center';
             actionTd.appendChild(pIndisponivel);
         } else {
             const pIndisponivel = document.createElement('p');
