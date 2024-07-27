@@ -34,8 +34,9 @@ input:focus:-ms-input-placeholder {
 .main-header {
   display: block;
   margin-bottom: 63px;
-  background-color: #000000;
-  color: #ffffff
+  background-color: #000000a6;
+  color: #ffffff;
+ 
 }
 
 .wrapper {
@@ -613,15 +614,20 @@ input[type="checkbox"] {
   display: grid;
   grid-template-columns: repeat(auto-fill,     minmax(290px, 1fr)); 
   justify-items: center;
-  grid-gap: 8px;
-  grid-row-gap: 15px;
+  grid-gap: 18px;
+  grid-row-gap: 75px;
   cursor: pointer;
   
     .img {
-    margin: 5px;
+    margin: 15px;
     padding: 2px;
     width: 100%;
+
     height: 200px;
+  }
+  .imggrid{
+    height: 250px;
+    width: 270px;
   }
 
   .img-scale img {
@@ -646,19 +652,18 @@ input[type="checkbox"] {
 .containertitulo{
     margin: 0 auto;
     width: 100%;
-    margin-top: 150px;
+    padding: 20px;
     text-align: center;
 
     font-size: 30px;
     color: white;
     font-weight: 1;
-    max-width: 800px;
 }
 .nossotrabalho{
     margin-bottom: 100px;
 }
 .contato{
-  width: 100px;
+    width: 100px;
     height: 100px;
   
     background-image: url('wpp.png');
@@ -684,19 +689,127 @@ input[type="checkbox"] {
          align-items: center;
          z-index: 100;
 }
-.bgconteudo{
-         width: 350px;
+.bgconteudo2{
+         width: 750px;
          height: 100%;
-         max-height: 380px;
+         max-height: 480px;
          
          margin: 50px auto;
          background-color: #fff;
          padding: 20px;
          border-radius: 8px;
          box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+         z-index: 101;
        
 }
-.containerconteudo{
+
+
+.fechar{
+         text-align: center;
+         width: 100%;
+         max-width: 80px;
+         padding: 15px;
+         padding-top:0px;
+         height: 30px;
+         color: white;
+         border: 1px solid white;
+         border-radius: 12px;
+         background-color: #ff4545;
+         margin: 10px auto;
+
+      
+         cursor: pointer;
+
+         padding: 5px;
+         height: 23px;
+  }
+
+   
+
+  .fechar p {
+   position: relative;
+   top: -12px; }
+
+
+
+
+
+   .containertable{
+            max-height: 380px;
+            overflow-y: auto;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            background-color: #fff;
+        }
+        .containerfiltros{
+            max-height: 300px;
+            display: flex;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            background-color: #5a2323;
+            width: 100%;
+        }
+        .filtrossinlge{
+            margin: 0 auto;
+            width: 30%;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+            color: black;
+        }
+
+        th {
+            background-color: #f4f4f4;
+        }
+
+        button {
+          text-align: center;
+          margin: 0 auto;
+          
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        .agendarhorario{
+            background-color: #4CAF50;
+            text-align: center;
+            margin: 0 auto;
+        }
+      .btnvideoplay{
+        width: 100px;
+        height: 100px;
+        margin: 0 auto;
+        background-color: rgba(189, 188, 188, 0.646);
+        border-radius: 100px;
+        position: relative;
+        cursor: pointer;
+        top: -300px;
+      } 
+      .btnvideoplay img{
+        position: relative;
+        top: 23px;
+      }
+      .video{
+        text-align: center;
+            margin: 0 auto;
+            width: 100%;
+      }
+
+      .containerconteudo{
     margin-bottom: 70px;
     margin: 0 auto;
     width: 100%;
@@ -727,7 +840,7 @@ input[type="checkbox"] {
   <body>
 
 
-    <header class="main-header">
+    <header class="main-header" style="position: fixed; z-index: 41; width: 100%;">
       <div class="wrapper clearfix">
         <nav class="main-navigation">
           <ul>
@@ -735,10 +848,7 @@ input[type="checkbox"] {
               <a href="index.html">menu</a>
             </li>
          
-            <li>
-              <a href="price.html">Agenda</a>
-            </li>
-          
+        
 
             <li>
                 <a href="blog.html">Blog</a>
@@ -764,14 +874,14 @@ input[type="checkbox"] {
 
    
 
-    <div class="containerconteudo">
+    <div class="containerconteudo" style="padding-top: 130px;" >
 
         <div class="containertitulo" style="text-align: left;">
             <h2>Portifólio do tatuador</h2>
         </div>
 
         <div class="paragrafocontent"> 
-        <p>Bem-vindo ao portfólio de [Nome do Tatuador], onde a arte e a paixão se encontram para criar tatuagens únicas e memoráveis. Com [X] anos de experiência no mundo da tatuagem, [Nome do Tatuador] se especializa em transformar ideias e emoções em obras de arte permanentes na pele de seus clientes.</p>
+        <p>Bem-vindo ao portfólio do TH, onde a arte e a paixão se encontram para criar tatuagens únicas e memoráveis. Com 4 anos de experiência no mundo da tatuagem, TH se especializa em transformar ideias e emoções em obras de arte permanentes na pele de seus clientes.</p>
     </div>
 
         <div class="imgconteudo">
@@ -785,23 +895,6 @@ input[type="checkbox"] {
 
 
 
-    <div class="containerconteudo">
-
-        <div class="containertitulo" style="text-align: left;">
-            <h2>Sobre o Barbeiro
-            </h2>
-        </div>
-
-        <div class="paragrafocontent"> 
-        <p>[Nome do Tatuador] começou sua jornada no mundo da tatuagem há [X] anos, motivado por uma paixão inata pela arte e pelo desejo de expressar a individualidade de cada pessoa através da tinta. Com formação em [Background Artístico ou Educação], ele(a) aprimorou suas habilidades e desenvolveu um estilo único que combina [estilos preferidos, como realismo, aquarela, tradicional, neo-tradicional, etc.].</p>
-    </div>
-
-        <div class="imgconteudo">
-            <img src="corte5.jpeg">
-        </div>
-
-    </div>
-
 
 
     <div class="containerconteudo">
@@ -812,15 +905,50 @@ input[type="checkbox"] {
         </div>
 
         <div class="paragrafocontent"> 
-        <p>No portfólio de [Nome do Tatuador], você encontrará uma variedade de estilos que refletem sua versatilidade e competência artística:</p>
+        <p>No portfólio de TH, você encontrará uma variedade de estilos que refletem sua versatilidade e competência artística:</p>
+    
+    
+            <p>motivado por uma paixão inata pela arte e pelo desejo de expressar a individualidade de cada pessoa através da tinta. Com formação em [Background Artístico ou Educação], ele(a) aprimorou suas habilidades e desenvolveu um estilo único que combina estilos preferidos, como realismo, aquarela, tradicional, neo-tradicional, etc..</p>
+    
     </div>
 
-        <div class="imgconteudo">
-            <img src="logota.jpg">
-        </div>
+    <div class="imgconteudo">
+        <img src="img3tato.jpg">
+    </div>
 
     </div>
 
+
+    
+    <div class="containerconteudo">
+
+      <div class="containertitulo" style="text-align: left;">
+          <h2>Sobre o Barbeiro
+          </h2>
+      </div>
+
+      <div class="paragrafocontent"> 
+      <p>Lucas é um barbeiro com anos de experiência e uma paixão inigualável pelo que faz. Desde jovem, ele sempre teve um olhar atento para os detalhes e uma habilidade natural com as tesouras. Seu talento e dedicação o levaram a se tornar um dos barbeiros mais respeitados da região.</p>
+  </div>
+
+      <div class="imgconteudo">
+          <img src="corte5.jpeg">
+      </div>
+
+  </div>
+
+  <div class="containerconteudo">
+
+    <div class="containertitulo" style="text-align: left;">
+        <h2>Estilos e Especializações
+        </h2>
+    </div>
+
+<div class="imgconteudo">
+    <img src="corte2.jpeg">
+</div>
+
+</div>
 
 
     
@@ -830,16 +958,14 @@ input[type="checkbox"] {
     </main>
 
 
-
     <footer class="main-footer">
       <div class="container clearfix">
         <section class="footer-contacts">
-          Барбершоп «Бородинский»
+          Endereço:
           <br>
-          Адрес: г. Санкт-Петербург, ул. Б. Конюшенная, д. 19/8
+          Júri danilenko 2484 2° andar
           <br>
-          <a href="https://yandex.ru/maps/-/CBUM4TA0HD
-" target="_blank">Как нас найти?</a>
+         
           <br>
           Telefone: +7 (812) 666-02-62 
         </section>
@@ -849,38 +975,246 @@ input[type="checkbox"] {
           <a class="social-btn social-btn-fb" href="#">Фэйсбук</a>
           <a class="social-btn social-btn-inst" href="#">Инстаграм</a>
         </section>
-        <section class="footer-copyright">
-          <p>Разработано:</p>
-          <a class="btn" href="https://htmlacademy.ru">HTMLAcademy.ru</a>
-        </section>
+       
       </div>
     </footer>
 
 
-
-    
+ 
 
 
 
     <script>
 
-        function abrirmodal(id){
-            const elemento = document.getElementById(id)
-            elemento.style.display = 'initial'
+      function videoplay(){
+        const video = document.getElementById('videoPlayer');
+        video.play();
+        const btv = document.getElementById('btnplayvieo1')
+        btv.style.display = 'none'
+
+        const video2 = document.getElementById('videoPlayer2');
+        video2.pause();
+
+        const btv2 = document.getElementById('btnplayvieo2')
+        btv2.style.display = 'block'
+
+      }
+
+      function videoplay2(){
+        const video2 = document.getElementById('videoPlayer2');
+        video2.play();
+
+        const btv = document.getElementById('btnplayvieo2')
+        btv.style.display = 'none'
+
+        const video = document.getElementById('videoPlayer');
+        video.pause();
+
+        const btv2 = document.getElementById('btnplayvieo1')
+        btv2.style.display = 'block'
+      }
+
+function sucesso(){
+  const elemento = document.getElementById('sucesso');
+    elemento.style.display = 'initial';
+
+    setTimeout(() => {
+      elemento.style.display = 'none';
+          }, 2000);
+}
+
+
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(event) {
+                event.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({ 
+                    behavior: 'smooth' 
+                });
+            });
+        })
+
+function redireciona(){
+
+  window.location.href = `https://wa.me/message/3K5ZU4AB3DHNG1`
+}
+let currentDay = new Date();
+
+function abrirmodal(id) {
+    const elemento = document.getElementById(id);
+    elemento.style.display = 'initial';
+    fazerRequisicaoGet();
+}
+
+function fecharmodal(id) {
+    const elemento = document.getElementById(id);
+    elemento.style.display = 'none';
+}
+
+
+horaglobal = null
+function abrirmodalcolocarnome(hora){
+  horaglobal = hora
+  console.log(horaglobal)
+  const elemento = document.getElementById('modalnome');
+    elemento.style.display = 'initial';
+}
+
+
+
+function fecharmodalnome(id){
+  const elemento = document.getElementById(id);
+    elemento.style.display = 'none';
+}
+
+
+function marcarhorario() {
+  const email = document.getElementById('email')
+  const nome = document.getElementById('nome')
+
+  console.log(horaglobal)
+
+
+    const mes = String(currentDay.getMonth() + 1).padStart(2, '0');
+    const dia = String(currentDay.getDate()).padStart(2, '0');
+    const url = `https://thtato-20e86-default-rtdb.firebaseio.com/meses/${mes}/dias/${dia}/horarios/${horaglobal}.json`;
+
+    fetch(url, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ disponibilidade: false })
+    }).then(response => response.json())
+      .then(data => {
+          console.log('Horário atualizado:', data);
+          const elemento = document.getElementById('modalnome');
+    elemento.style.display = 'none';
+          fazerRequisicaoGet();
+      });
+}
+
+function Cadastrarusuario() {
+  const email = document.getElementById('emailcli').value
+  const nome = document.getElementById('nomecli').value
+  const Telefone = document.getElementById('telcli').value
+
+  console.log(email, nome)
+
+          var dataConclusao = new Date().toISOString();
+
+            // Converter a data para um objeto Date
+            var dataObj = new Date(dataConclusao);
+
+            // Extrair o dia, mês e ano do objeto Date
+            var dia = dataObj.getUTCDate().toString().padStart(2, '0');
+            var mes = (dataObj.getUTCMonth() + 1).toString().padStart(2, '0'); // Os meses em JavaScript são baseados em zero
+            var ano = dataObj.getUTCFullYear();
+
+            // Formatar a data no formato desejado
+            var dataFormatada = `${dia}/${mes}/${ano}`;
+
+            console.log(dataFormatada);
+
+
+    const url = `https://thtato-20e86-default-rtdb.firebaseio.com/clientes.json`;
+
+    fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: email, nome: nome,Telefone: Telefone, data:dataFormatada })
+    }).then(response => response.json())
+      .then(data => {
+          console.log('Horário atualizado:', data);
+          const elemento = document.getElementById('modalnome');
+    elemento.style.display = 'none';
+         sucesso();
+          fazerRequisicaoGet();
+      });
+}
+
+
+
+function fazerRequisicaoGet() {
+    const mes = String(currentDay.getMonth() + 1).padStart(2, '0');
+    const dia = String(currentDay.getDate()).padStart(2, '0');
+    const url = `https://thtato-20e86-default-rtdb.firebaseio.com/meses/${mes}/dias/${dia}.json`;
+
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            if (data && data.horarios) {
+                document.getElementById('textotitulo').innerText = `Horários de ${data.diadasemana}, ${data.data}`;
+                document.getElementById('textotitulo').style.color = 'black'
+                populateTable(data.horarios);
+            }
+        });
+}
+
+function populateTable(horarios) {
+    const tbody = document.querySelector('#dataTable tbody');
+    tbody.innerHTML = '';
+
+    for (const hora in horarios) {
+        const tr = document.createElement('tr');
+
+        const horarioTd = document.createElement('td');
+        horarioTd.textContent = hora;
+        tr.appendChild(horarioTd);
+
+        const disponibilidadeTd = document.createElement('td');
+        disponibilidadeTd.textContent = horarios[hora].disponibilidade ? 'Disponível' : 'Indisponível';
+        tr.appendChild(disponibilidadeTd);
+
+        const actionTd = document.createElement('td');
+        actionTd.style.textAlign = 'Center';
+
+        if (horarios[hora].disponibilidade) {
+            const btn = createButton('Agendar', hora);
+            btn.classList.add('agendarhorario');
+            actionTd.appendChild(btn);
+        } else {
+            const pIndisponivel = document.createElement('p');
+            pIndisponivel.textContent = 'Horário indisponível';
+            pIndisponivel.style = 'color: red; text-align: center';
+            actionTd.appendChild(pIndisponivel);
         }
 
-        function fecharmodal(id){
-            const elemento = document.getElementById(id)
-            elemento.style.display = 'none'
+        tr.appendChild(actionTd);
+        tbody.appendChild(tr);
+    }
+}
+
+function createButton(text, hora) {
+    const button = document.createElement('button');
+    button.textContent = text;
+    button.addEventListener('click', () => abrirmodalcolocarnome(hora));
+    return button;
+}
+
+function mudarDia(incremento) {
+    currentDay.setDate(currentDay.getDate() + incremento);
+    fazerRequisicaoGet();
+    atualizarDataAtual();
+}
+
+function atualizarDataAtual() {
+    const dataOptions = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    const dataFormatada = currentDay.toLocaleDateString('pt-BR', dataOptions);
+    document.getElementById('dataAtual').innerText = dataFormatada;
+}
+
+document.getElementById('anterior').addEventListener('click', () => mudarDia(-1));
+document.getElementById('proximo').addEventListener('click', () => mudarDia(1));
+
+// Inicializa a data exibida ao abrir o modal
+atualizarDataAtual();
+
+    function handleAction(id, action) {
+        console.log(id, action)
+        if(action == 'Agendar'){
+            update(id)
         }
-
-        function marcarhorario(){
-
-        }
-
-        function pegarhorarios(){
-
-        }
+       
+      
+    }
 
     </script>
 

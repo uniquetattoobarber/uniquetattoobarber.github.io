@@ -1,0 +1,911 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>UniqueTattooBarber</title>    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700&amp;subset=latin,cyrillic">
+
+<style>
+    body {
+  width: 100%;
+  min-width: 960px;
+  margin: 0;
+  padding: 0;
+  background: url('https://loriens.github.io/barbershop/img/background.png') center top no-repeat #000000;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 700;
+  font-family: "PT Sans Narrow", Arial, sans-serif;
+  line-height: 24px;
+  text-transform: uppercase;
+}
+
+input:focus::-webkit-input-placeholder {
+    color: transparent;
+}
+
+input:focus::-moz-placeholder {
+    color: transparent;
+}
+
+input:focus:-ms-input-placeholder {
+    color: transparent;
+}
+
+.main-header {
+  display: block;
+  margin-bottom: 63px;
+  background-color: #000000;
+  color: #ffffff
+}
+
+.wrapper {
+  width: 940px;
+  margin: 0 auto;
+  padding: 0 10px;
+  min-height: 70px;
+}
+
+.clearfix {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.main-navigation {
+  float: left;
+  width: 780px;
+  min-height: 70px;
+}
+
+.main-navigation ul {
+  margin: 0;
+  padding: 0;
+  font-size: 0;
+  list-style: none;
+}
+
+.main-navigation li {
+  display: inline-block;
+  vertical-align: top;
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.main-navigation a {
+  display: block;
+  padding: 25px 20px;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.user-block {
+  float: right;
+  max-width: 140px;
+  min-height: 70px;
+}
+
+.login {
+  display: inline-block;
+  position: relative;
+  padding: 25px 20px 25px 53px;
+  color: #ffffff;
+  font-size: 16px;
+  line-height: 20px;
+  text-decoration: none;
+  vertical-align: top; 
+}
+
+.login::before {
+  content: "";
+  position: absolute;
+  width: 18px;
+  height: 16px;
+  top: 28px;
+  left: 20px;
+  background: url(https://loriens.github.io/barbershop/img/sprite.png) -5px -239px no-repeat;
+  opacity: 0.3
+}
+
+.main-navigation a:hover {
+  background: #242424;
+}
+
+.login:hover {
+  background: #242424;
+}
+.login:hover:before {
+  opacity: 1;
+}
+
+main {
+  display: block
+}
+
+.container {
+  width: 940px;
+  margin: 0 auto;
+  padding: 0 10px;
+  min-height: 70px;
+}
+
+.index-logo {
+  width: 368px;
+  height: 204px;
+  margin: 0 auto 19px;
+  padding-left: 10px;
+  min-height: 204px;
+}
+
+.features {
+  margin-bottom: 78px;
+}
+
+.features-item {
+  float: left;
+  width: 300px;
+  margin-right: 20px;
+  text-align: center
+}
+
+.features-name {
+  display: block;
+  position: relative;
+  margin-bottom: 25px;
+  padding-bottom: 35px;
+  font-size: 30px;
+  line-height: 42px;
+}
+
+.features-name::after {
+	content: "";
+	position: absolute;
+	bottom: 3px;
+	left: 50%;
+	display: block;
+	width: 20px;
+	height: 20px;
+	margin-left: -10px;
+	background-color: #ffffff;
+	-webkit-transform: rotate(45deg);
+	transform: rotate(45deg);
+}
+
+.features-item:last-child {
+  margin-right: 0
+}
+
+.features-item p {
+	margin: 10px 10px 0;
+}
+
+.index-content {
+  width: 780px;
+  margin-bottom: 35px;
+  padding: 45px 80px 50px;
+  color: #000000;
+  background: url(https://loriens.github.io/barbershop/img/separator.png) center no-repeat, #f8f5f2 url("http://i.imgur.com/YtkFoYk.jpg");
+}
+
+.index-content-left {
+  float: left;
+  width: 380px;
+}
+
+.index-content-title {
+  margin: 0 0 20px;
+  font-size: 30px;
+  line-height: 42px;
+}
+
+.news-preview {
+	margin: 0;
+	padding: 0 35px 0 0;
+	list-style: none;
+}
+
+.news-preview li {
+	margin-bottom: 25px;
+}
+
+.news-preview p {
+	margin-bottom: 0;
+}
+
+.news-preview time {
+	text-decoration: none;
+	text-transform: none;
+}
+
+.btn {
+  display: inline-block;
+	width: 140px;
+	margin: 0 16px 0 auto;
+	padding: 10px 0;
+	font-size: 14px;
+	line-height: 24px;
+  text-align: center;
+	vertical-align: top;
+	text-decoration: none;
+	text-transform: uppercase;
+	color: #ffffff;
+	background-color: #000000;
+	border: 0;
+	outline: 0;
+	cursor: pointer;
+}
+
+.btn:hover,.btn:active {
+  background: #663d15;
+}
+.btn:disabled {
+  cursor: default;
+  opacity: 0.5;
+}
+.btn:disabled:hover {
+  background: #000;
+}
+
+.index-content-right {
+	float: right;
+	width: 300px;
+}
+
+.gallery {
+	position: relative;
+	height: 260px;
+}
+
+.gallery-content {
+	height: 164px;
+	margin: 0;
+	background-color: #cccccc;
+	border: 7px solid #ffffff;
+}
+
+.gallery .btn {
+	display: inline-block;
+	vertical-align: top;
+	text-decoration: none;
+	position: absolute;
+	bottom: 0;
+	width: 140px;
+	margin: 0;
+	padding: 10px 0;
+	font: inherit;
+	line-height: 24px;
+	text-transform: uppercase;
+	color: #ffffff;
+	background-color: #000000;
+	border: 0;
+	outline: 0;
+	cursor: pointer;
+}
+
+.gallery .btn {
+  position :absolute;
+  bottom:0;
+  width: 140px;
+  margin: 0;
+}
+.gallery-prev {
+  left: 0;
+}
+.gallery-next {
+  right: 0;
+}
+
+.btn:disabled {
+	cursor: default;
+	opacity: 0.5;
+}
+
+.btn:hover {
+	background: #663d15;
+}
+
+.appointment-form {
+	padding-top: 5px;
+}
+
+.appointment-form input {
+	float: left;
+	width: 106px;
+	margin-right: 20px;
+	margin-bottom: 20px;
+	padding: 7px 15px;
+	font: inherit;
+	color: inherit;
+	text-transform: inherit;
+	background-color: #f9f6f3;
+	border: 2px solid #000000;
+	outline: 0;
+}
+
+.appointment-form input:nth-child(2n) {
+	margin-right: 0;
+}
+
+.appointment-form .btn {
+	clear: both;
+	width: 100%;
+  font: inherit
+}
+
+.main-footer {
+  display: block;
+  margin-top: 65px;
+  padding-top: 60px;
+  padding-bottom: 40px;
+  color: #ffffff;
+  background: url("https://loriens.github.io/barbershop/img/pattern-black.jpg") #252525
+}
+
+.footer-contacts {
+	float: left;
+	width: 320px;
+	min-height: 90px;
+}
+
+.footer-contacts a {
+  color: #ffffff
+}
+
+.footer-social {
+  float: left;
+  width: 180px;
+  padding-left: 60px;
+  text-align: center;
+}
+
+.footer-social p {
+  margin: 0 0 15px
+}
+
+.social-btn {
+	display: inline-block;
+	vertical-align: top;
+	text-decoration: none;
+	width: 43px;
+	height: 43px;
+	margin: 0 2px;
+	font-size: 0;
+	background: url("https://loriens.github.io/barbershop/img/sprite.png") center no-repeat #000000;
+	-webkit-transition: background-position 0.5s,background-color 0.5s;
+	transition: background-position 0.5s,background-color 0.5s;
+}
+
+.social-btn:hover {
+	background-color: #ffffff;
+}
+
+.social-btn-vk {
+	background-position: -5px -265px;
+}
+
+.social-btn-vk:hover {
+	background-position: -5px -318px;
+}
+
+.social-btn-fb {
+	background-position: -5px -27px;
+}
+
+.social-btn-fb:hover {
+	background-position: -5px -80px;
+}
+
+.social-btn-inst {
+	background-position: -5px -133px;
+}
+
+.social-btn-inst:hover {
+	background-position: -5px -186px;
+}
+
+.footer-copyright {
+	float: right;
+	width: 180px;
+	margin-right: -20px;
+	max-width: 180px;
+  text-align: center
+}
+
+.footer-copyright p {
+	margin: 0 0 15px;
+	text-align: center;
+}
+
+.footer-copyright .btn {
+	margin-right: 0;
+}
+
+.modal-content {
+  display: none;
+	position: fixed;
+	top: 120px;
+	left: 50%;
+	width: 300px;
+	margin-left: -230px;
+	padding: 50px 80px;
+	color: #000000;
+	background: url("http://i.imgur.com/YtkFoYk.jpg") #f8f3f0;
+	box-shadow: 0 30px 50px rgba(0, 1, 1, 0.75);
+	z-index: 1000;
+}
+
+.modal-content-show {
+	-webkit-animation: bounce 0.6s;
+	animation: bounce 0.6s;
+}
+
+.modal-content-map {
+  display: none;
+  position: absolute;
+  right: 29.5%;
+  top: 575px;
+  width: 767px;
+  height: 561px;
+  z-index: 999;
+  border: 7px solid #ffffff;
+  box-shadow: 0 30px 50px rgba(0, 1, 1, 0.75);
+}
+
+.modal-content-close,
+.modal-content-map-close {
+	position: absolute;
+	top: 0;
+	right: -34px;
+	width: 22px;
+	height: 22px;
+	font-size: 0;
+	background-color: transparent;
+	border: 0;
+	outline: 0;
+	cursor: pointer;
+}
+
+.modal-content-close::before, 
+.modal-content-close::after,
+.modal-content-map-close::before,
+.modal-content-map-close::after{
+	content: "";
+	position: absolute;
+	top: 10px;
+	left: 2px;
+	width: 19px;
+	height: 3px;
+	background-color: #d0d0d0;
+	border-radius: 1px;
+}
+
+.modal-content-close::before,
+.modal-content-map-close::before{
+	-webkit-transform: rotate(45deg);
+	transform: rotate(45deg);
+}
+
+.modal-content-close::after,
+.modal-content-map-close::after{
+	-webkit-transform: rotate(-45deg);
+	transform: rotate(-45deg);
+}
+
+.modal-content h2 {
+	margin: 0 0 20px;
+	font-size: 30px;
+	line-height: 42px;
+}
+
+.modal-content p {
+	margin: 0 0 14px;
+}
+
+.modal-content .login-form {
+	margin-top: 30px;
+	margin-bottom: 10px;
+}
+
+.login-form input.icon-user {
+	background-image: url("https://loriens.github.io/barbershop/img/ico-user.png");
+	background-repeat: no-repeat;
+	background-position: 96% 50%;
+}
+
+.login-form input.icon-password {
+	background-image: url("https://loriens.github.io/barbershop/img/ico-locked.png");
+	background-repeat: no-repeat;
+	background-position: 96% 50%;
+}
+
+.login-form input[type="text"], .login-form input[type="password"] {
+	width: 241px;
+	margin: 0 0 10px;
+	padding: 10px 40px 10px 15px;
+	font-size: 14px;
+	line-height: 24px;
+	font-family: "PT Sans Narrow",Arial,sans-serif;
+	color: #000;
+	text-transform: uppercase;
+	background-color: #f9f6f3;
+	border: 2px solid #000;
+	outline: 0;
+}
+
+.login-checkbox {
+	position: relative;
+	padding-left: 30px;
+	cursor: pointer;
+}
+
+.login-checkbox:hover {
+	color: #663d15;
+}
+
+.login-checkbox input[type="checkbox"] {
+	display: none;
+}
+
+input[type="checkbox"] {
+	box-sizing: border-box;
+	padding: 0;
+}
+
+.login-checkbox input[type="checkbox"] + .checkbox-indicator {
+	position: absolute;
+	top: -3px;
+	left: 0;
+	width: 17px;
+	height: 17px;
+	border: 2px solid #000000;
+}
+
+.login-checkbox input[type="checkbox"]:checked + .checkbox-indicator::before, .login-checkbox input[type="checkbox"]:checked + .checkbox-indicator::after {
+	content: "";
+	position: absolute;
+	top: 8px;
+	left: 1px;
+	width: 15px;
+	height: 2px;
+	background-color: #000;
+}
+
+.login-checkbox input[type="checkbox"]:checked + .checkbox-indicator::before {
+	-webkit-transform: rotate(45deg);
+	transform: rotate(45deg);
+}
+
+.login-checkbox input[type="checkbox"]:checked + .checkbox-indicator::after {
+	-webkit-transform: rotate(-45deg);
+	transform: rotate(-45deg);
+}
+
+.login-form .restore {
+	float: right;
+	color: #000;
+}
+
+.login-form .btn {
+	width: 100%;
+	margin-top: 15px;
+  font: inherit
+}
+
+
+
+
+#header {
+  text-align: center; 
+  color: #ee3d2b;
+  padding-bottom: 20px;
+  h1 {
+    font-size: 32px;
+  }
+  h3 {
+    font-size: 16px;
+    font-weight: 300;
+  }
+  a {
+    color: #ee3d2b;
+  }
+}
+
+.images-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill,     minmax(290px, 1fr)); 
+  justify-items: center;
+  grid-gap: 8px;
+  grid-row-gap: 15px;
+  cursor: pointer;
+  
+    .img {
+    margin: 5px;
+    padding: 2px;
+    width: 100%;
+    height: 200px;
+  }
+
+  .img-scale img {
+    transition: all 0.8s;
+  }
+
+  .img-scale:hover img{
+    transform: scale(1.2);
+  }
+}
+
+#footer {
+  text-align: center;
+  padding: 35px 0 25px 0; 
+  small { 
+    font-size: 16px;
+    color: #ee3d2b;
+    font-weight: 300;
+  }
+}
+
+.containertitulo{
+    margin: 0 auto;
+    width: 100%;
+    margin-top: 150px;
+    text-align: center;
+
+    font-size: 30px;
+    color: white;
+    font-weight: 1;
+    max-width: 800px;
+}
+.nossotrabalho{
+    margin-bottom: 100px;
+}
+.contato{
+  width: 100px;
+    height: 100px;
+  
+    background-image: url('wpp.png');
+    top: 540px;
+    background-size: cover; /* Ajusta a imagem para cobrir todo o fundo */
+    background-repeat: no-repeat; /* Evita que a imagem se repita */
+    background-position: center center; 
+    border-radius: 300px;
+    cursor: pointer;
+    left: 90%;
+    position: fixed;
+}
+
+.bgL{
+      display: none;
+         position: fixed;
+         top: 0;
+         left: 0;
+         width: 100%;
+         height: 100%;
+         background-color: rgba(0, 0, 0, 0.5); /* Fundo escuro semi-transparente */
+         justify-content: center;
+         align-items: center;
+         z-index: 100;
+}
+.bgconteudo{
+         width: 350px;
+         height: 100%;
+         max-height: 380px;
+         
+         margin: 50px auto;
+         background-color: #fff;
+         padding: 20px;
+         border-radius: 8px;
+         box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+       
+}
+.containerconteudo{
+    margin-bottom: 70px;
+    margin: 0 auto;
+    width: 100%;
+    text-align: center;
+    max-width: 700px;
+    margin-left:100px;
+    
+}
+.paragrafocontent{
+    text-align: left;
+}
+.imgconteudo{
+    margin-top: 40px;
+    text-align: left;
+    width: 700px;
+}
+.imgconteudo img{
+    width: 100%;
+}
+</style>
+
+
+
+  </head>
+
+
+
+  <body>
+
+
+    <header class="main-header">
+      <div class="wrapper clearfix">
+        <nav class="main-navigation">
+          <ul>
+            <li>
+              <a href="index.html">menu</a>
+            </li>
+         
+            <li>
+              <a href="price.html">Agenda</a>
+            </li>
+          
+
+            <li>
+                <a href="blog.html">Blog</a>
+              </li>
+          
+          </ul>
+        </nav>
+        <div class="user-block">
+          <a class="login" href="#">Вход</a>
+        </div>
+      </div>
+    </header>
+    <main class="container">
+        
+    <div class="contato">
+
+    </div>
+
+ 
+    
+
+
+
+   
+
+    <div class="containerconteudo">
+
+        <div class="containertitulo" style="text-align: left;">
+            <h2>Portifólio do tatuador</h2>
+        </div>
+
+        <div class="paragrafocontent"> 
+        <p>Bem-vindo ao portfólio do TH, onde a arte e a paixão se encontram para criar tatuagens únicas e memoráveis. Com 4 anos de experiência no mundo da tatuagem, TH se especializa em transformar ideias e emoções em obras de arte permanentes na pele de seus clientes.</p>
+    </div>
+
+        <div class="imgconteudo">
+            <img src="img2tato.jpg">
+        </div>
+
+    </div>
+
+
+
+
+
+
+    <div class="containerconteudo">
+
+        <div class="containertitulo" style="text-align: left;">
+            <h2>Sobre o Barbeiro
+            </h2>
+        </div>
+
+        <div class="paragrafocontent"> 
+        <p>[Nome do Tatuador] começou sua jornada no mundo da tatuagem há [X] anos, motivado por uma paixão inata pela arte e pelo desejo de expressar a individualidade de cada pessoa através da tinta. Com formação em [Background Artístico ou Educação], ele(a) aprimorou suas habilidades e desenvolveu um estilo único que combina [estilos preferidos, como realismo, aquarela, tradicional, neo-tradicional, etc.].</p>
+    </div>
+
+        <div class="imgconteudo">
+            <img src="corte5.jpeg">
+        </div>
+
+    </div>
+
+
+
+
+
+    <div class="containerconteudo">
+
+        <div class="containertitulo" style="text-align: left;">
+            <h2>Estilos e Especializações
+            </h2>
+        </div>
+
+        <div class="paragrafocontent"> 
+        <p>No portfólio de [Nome do Tatuador], você encontrará uma variedade de estilos que refletem sua versatilidade e competência artística:</p>
+    </div>
+
+        <div class="imgconteudo">
+            <img src="logota.jpg">
+        </div>
+
+    </div>
+
+
+    
+    <div class="containerconteudo">
+
+      <div class="containertitulo" style="text-align: left;">
+          <h2>Sobre o Barbeiro
+          </h2>
+      </div>
+
+      <div class="paragrafocontent"> 
+      <p>[Nome do Tatuador] começou sua jornada no mundo da tatuagem há [X] anos, motivado por uma paixão inata pela arte e pelo desejo de expressar a individualidade de cada pessoa através da tinta. Com formação em [Background Artístico ou Educação], ele(a) aprimorou suas habilidades e desenvolveu um estilo único que combina [estilos preferidos, como realismo, aquarela, tradicional, neo-tradicional, etc.].</p>
+  </div>
+
+      <div class="imgconteudo">
+          <img src="corte5.jpeg">
+      </div>
+
+  </div>
+
+
+
+
+    
+
+
+    
+    </main>
+
+
+
+    <footer class="main-footer">
+      <div class="container clearfix">
+        <section class="footer-contacts">
+          Барбершоп «Бородинский»
+          <br>
+          Адрес: г. Санкт-Петербург, ул. Б. Конюшенная, д. 19/8
+          <br>
+          <a href="https://yandex.ru/maps/-/CBUM4TA0HD
+" target="_blank">Как нас найти?</a>
+          <br>
+          Telefone: +7 (812) 666-02-62 
+        </section>
+        <section class="footer-social">
+          <p>Siga a gente em todas as redes!</p>
+          <a class="social-btn social-btn-vk" href="#">ВКонтакте</a>
+          <a class="social-btn social-btn-fb" href="#">Фэйсбук</a>
+          <a class="social-btn social-btn-inst" href="#">Инстаграм</a>
+        </section>
+        <section class="footer-copyright">
+          <p>Разработано:</p>
+          <a class="btn" href="https://htmlacademy.ru">HTMLAcademy.ru</a>
+        </section>
+      </div>
+    </footer>
+
+
+
+    
+
+
+
+    <script>
+
+        function abrirmodal(id){
+            const elemento = document.getElementById(id)
+            elemento.style.display = 'initial'
+        }
+
+        function fecharmodal(id){
+            const elemento = document.getElementById(id)
+            elemento.style.display = 'none'
+        }
+
+        function marcarhorario(){
+
+        }
+
+        function pegarhorarios(){
+
+        }
+
+    </script>
+
+
+  </body>
+</html>
