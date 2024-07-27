@@ -789,7 +789,25 @@ input[type="checkbox"] {
             text-align: center;
             margin: 0 auto;
         }
-      
+      .btnvideoplay{
+        width: 100px;
+        height: 100px;
+        margin: 0 auto;
+        background-color: rgba(189, 188, 188, 0.646);
+        border-radius: 100px;
+        position: relative;
+        cursor: pointer;
+        top: -300px;
+      } 
+      .btnvideoplay img{
+        position: relative;
+        top: 23px;
+      }
+      .video{
+        text-align: center;
+            margin: 0 auto;
+            width: 100%;
+      }
 </style>
 
 
@@ -962,10 +980,7 @@ input[type="checkbox"] {
                  mas também um completo leque de serviços de estética e relaxamento.</p>
               <time datetime="2016-01-11">11 января</time>
             </li>
-            <li>
-              <p>В нашей команде пополнение, Борис "Бритва" Стригунец, обладатель множества титулов и наград пополнил наши стройные ряды</p>
-              <time datetime="2016-01-18">18 января</time>
-            </li>
+          
           </ul>
         
         </div>
@@ -1014,11 +1029,11 @@ input[type="checkbox"] {
             <time datetime="2016-01-11">4 anos de Experiência</time>
           </li>
           <li>
-            <p>В нашей команде пополнение, Борис "Бритва" Стригунец, обладатель множества титулов и наград пополнил наши стройные ряды</p>
-            <time datetime="2016-01-18">18 января</time>
+            <p>Entre em contato com a gente e agende seu horário</p>
+           
           </li>
         </ul>
-        <a class="btn" href="#">Все новости</a>
+        <a  onclick="redireciona()" class="btn" href="https://wa.me/message/3K5ZU4AB3DHNG1">Contato</a>
          </div>
       </div>
 
@@ -1070,6 +1085,40 @@ input[type="checkbox"] {
 
       </div><!--noss trabalho-->
 
+
+
+      <div class="nossotrabalho">
+
+        
+      <div class="containertitulo" id="trab">
+
+        <h2>Corte Arte </h2>
+
+      </div>
+
+
+        <div style="margin: 0 auto; text-align: center; width: 100%; display: flex;">
+      
+          <div class="video">
+            <video src="video1.mp4" id="videoPlayer" type="video/mp4"  style="width: 300px; margin: 0 auto; text-align: center; " loop="true" autoplay="autoplay"></video>
+            
+            <div class="btnvideoplay" id="btnplayvieo1" onclick="videoplay()">
+            <img src="playbtn.png" width="50px">
+          </div>
+          </div>
+
+
+          <div class="video">
+            <video src="video2.mp4" id="videoPlayer2" type="video/mp4"  style="width: 300px; margin: 0 auto; text-align: center; " loop="true" autoplay="autoplay"></video>
+            
+            <div class="btnvideoplay" id="btnplayvieo2" onclick="videoplay2()">
+            <img src="playbtn.png" width="50px">
+          </div>
+          </div>
+       
+      </div>
+     
+      </div>
 
 
       <div class="index-content clearfix">
@@ -1130,6 +1179,34 @@ input[type="checkbox"] {
 
 
     <script>
+
+      function videoplay(){
+        const video = document.getElementById('videoPlayer');
+        video.play();
+        const btv = document.getElementById('btnplayvieo1')
+        btv.style.display = 'none'
+
+        const video2 = document.getElementById('videoPlayer2');
+        video2.pause();
+
+        const btv2 = document.getElementById('btnplayvieo2')
+        btv2.style.display = 'block'
+
+      }
+
+      function videoplay2(){
+        const video2 = document.getElementById('videoPlayer2');
+        video2.play();
+
+        const btv = document.getElementById('btnplayvieo2')
+        btv.style.display = 'none'
+
+        const video = document.getElementById('videoPlayer');
+        video.pause();
+
+        const btv2 = document.getElementById('btnplayvieo1')
+        btv2.style.display = 'block'
+      }
 
 function sucesso(){
   const elemento = document.getElementById('sucesso');
