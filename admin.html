@@ -994,11 +994,11 @@ input[type="checkbox"] {
 
     <div style="display: flex;">
 
-      <button style="color: #252525;" id="anterior">Dia Anterior</button>
+      <button style="color: #252525;" id="anteriortato">Dia Anterior</button>
 
       <span id="dataAtual" style="color: #ffffff;"></span>
 
-      <button style="color: #252525;" id="proximo">Próximo Dia</button>
+      <button style="color: #252525;" id="proximotato">Próximo Dia</button>
 
     </div>
 
@@ -1301,9 +1301,16 @@ function populateTabletato(horarios) {
             const btn = createButtontato('Confirmar', hora, horarios[hora].tel, horarios[hora].nome, );
             btn.classList.add('agendarhorario');
             actionTd.appendChild(btn);
-        } else {
+        } else if(horarios[hora].disponibilidade == 'disponivel')
+        {
             const pIndisponivel = document.createElement('p');
             pIndisponivel.textContent = 'Horário  disponível';
+            pIndisponivel.style = 'color: green; text-align: center';
+            actionTd.appendChild(pIndisponivel);
+        }else if(horarios[hora].disponibilidade == 'agendado')
+        {
+            const pIndisponivel = document.createElement('p');
+            pIndisponivel.textContent = 'Horário  indisponível';
             pIndisponivel.style = 'color: red; text-align: center';
             actionTd.appendChild(pIndisponivel);
         }
@@ -1458,6 +1465,7 @@ function createButton(text, hora) {
 function mudarDia(incremento) {
     currentDay.setDate(currentDay.getDate() + incremento);
     fazerRequisicaoGet();
+    fazerRequisicaoGettato()
     atualizarDataAtual();
 }
 
@@ -1469,6 +1477,11 @@ function atualizarDataAtual() {
 
 document.getElementById('anterior').addEventListener('click', () => mudarDia(-1));
 document.getElementById('proximo').addEventListener('click', () => mudarDia(1));
+
+
+document.getElementById('anteriortato').addEventListener('click', () => mudarDia(-1));
+document.getElementById('proximotato').addEventListener('click', () => mudarDia(1));
+
 
 // Inicializa a data exibida ao abrir o modal
 atualizarDataAtual();
