@@ -913,7 +913,7 @@ input[type="checkbox"] {
     </header>
     <main class="container">
         
-    <div class="contato animated-box ">
+    <div class="contato animated-box" onclick="redireciona()">
 
     </div>
 
@@ -1017,14 +1017,18 @@ input[type="checkbox"] {
           <br>
          
           <br>
-          Telefone: +7 (812) 666-02-62 
+          Telefone: +55 41 9864-9342
         </section>
         <section class="footer-social">
           <p>Siga a gente em todas as redes!</p>
           <a class="social-btn social-btn-vk" href="#">ВКонтакте</a>
           <a class="social-btn social-btn-fb" href="#">Фэйсбук</a>
-          <a class="social-btn social-btn-inst" href="#">Инстаграм</a>
+          <a class="social-btn social-btn-inst" href="https://www.instagram.com/uniquetattoobarber/">Инстаграм</a>
         </section>
+
+        <section class="footer-social">
+          <a class="btn" onclick="admin()">Admin</a>
+        </section>  
        
       </div>
     </footer>
@@ -1035,7 +1039,10 @@ input[type="checkbox"] {
 
 
     <script>
+function redireciona(){
 
+window.location.href = `https://wa.me/message/3K5ZU4AB3DHNG1`
+}
       function videoplay(){
         const video = document.getElementById('videoPlayer');
         video.play();

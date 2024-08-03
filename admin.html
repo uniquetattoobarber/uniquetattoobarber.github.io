@@ -792,6 +792,7 @@ input[type="checkbox"] {
             text-align: center;
             margin: 0 auto;
         }
+        
         .botoes{
           text-align: center;
           width: 100%;
@@ -909,6 +910,9 @@ input[type="checkbox"] {
         <div class="btn" onclick="clientes()">Clientes</div>
      <br>
         <div class="btn" onclick="cortes()">Cortes</div>
+
+        <br>
+        <div class="btn" onclick="tatos()">Tatuagens</div>
       
         
       </div>
@@ -976,6 +980,45 @@ input[type="checkbox"] {
 
 
 
+
+  
+
+  <div class="containertable" id="tatos" style="display: none; margin: 0 auto; text-align: center;">
+        
+    <div onclick="voltar()" style="width: 80px; height: 30px; color: rgb(0, 0, 0); padding-top: 2px; cursor: pointer; background-color: white; border-radius: 12px;">
+ Voltar
+    </div>
+
+
+      <p id="textotitulotato" style="margin: 0 auto; text-align: center; width: 100%; color: white;"></p>
+
+    <div style="display: flex;">
+
+      <button style="color: #252525;" id="anterior">Dia Anterior</button>
+
+      <span id="dataAtual" style="color: #ffffff;"></span>
+
+      <button style="color: #252525;" id="proximo">Próximo Dia</button>
+
+    </div>
+
+    <table id="dataTabletato" style="background-color: white;">
+        <thead>
+            <tr>
+                <th>Horários</th>
+                <th>Cliente</th>
+                <th style="width: 200px;">Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Linhas serão adicionadas dinamicamente aqui -->
+        </tbody>
+    </table>
+</div>
+
+
+
+
      
 </div>
 
@@ -1020,6 +1063,9 @@ function sair(){
     const bg2 = document.getElementById('cortes')
     bg2.style.display = 'none'
 
+    const bg6 = document.getElementById('tatos')
+    bg6.style.display = 'none'
+
 
     const bg3 = document.getElementById('btns')
     bg3.style.display = 'initial'
@@ -1027,7 +1073,15 @@ function sair(){
 
       }
 
+      function tatos(){
+  const bg1 = document.getElementById('btns')
+    bg1.style.display = 'none'
 
+  const bg = document.getElementById('tatos')
+    bg.style.display = 'initial'
+
+    fazerRequisicaoGettato()
+}
 
 function clientes(){
   const bg1 = document.getElementById('btns')
@@ -1151,7 +1205,7 @@ function fazerRequisicaoGetClientes() {
 function fazerRequisicaoGet() {
     const mes = String(currentDay.getMonth() + 1).padStart(2, '0');
     const dia = String(currentDay.getDate()).padStart(2, '0');
-    const url = `https://thtato-20e86-default-rtdb.firebaseio.com/meses/${mes}/dias/${dia}.json`;
+    const url = `https://thtato-20e86-default-rtdb.firebaseio.com/barbearia/meses/${mes}/dias/${dia}.json`;
 
     fetch(url)
         .then(response => response.json())
@@ -1163,6 +1217,123 @@ function fazerRequisicaoGet() {
                 populateTable(data.horarios);
             }
         });
+}
+
+
+
+function marcarhorariotato(tel, nome, hora) {
+
+  console.log(tel, nome, hora)
+
+    const mes = String(currentDay.getMonth() + 1).padStart(2, '0');
+    const dia = String(currentDay.getDate()).padStart(2, '0');
+    const url = `https://thtato-20e86-default-rtdb.firebaseio.com/tattoo/meses/${mes}/dias/${dia}/horarios/${hora}.json`;
+
+    fetch(url, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ disponibilidade: 'agendado', tel: tel, nome: nome})
+    }).then(response => response.json())
+      .then(data => {
+          
+        fazerRequisicaoGettato();
+      });
+}
+
+
+function fazerRequisicaoGettato() {
+    const mes = String(currentDay.getMonth() + 1).padStart(2, '0');
+    const dia = String(currentDay.getDate()).padStart(2, '0');
+    const url = `https://thtato-20e86-default-rtdb.firebaseio.com/tattoo/meses/${mes}/dias/${dia}.json`;
+
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+
+            console.log(data)
+
+            if (data) {
+
+                document.getElementById('textotitulotato').innerText = `Horários de ${data.diadasemana}, ${data.data}`;
+                document.getElementById('textotitulotato').style.color = 'white'
+                populateTabletato(data.horarios);
+            }
+        });
+}
+
+
+function populateTabletato(horarios) {
+    const tbody = document.querySelector('#dataTabletato tbody');
+
+    tbody.innerHTML = '';
+
+    for (const hora in horarios) {
+        const tr = document.createElement('tr');
+
+        const horarioTd = document.createElement('td');
+        horarioTd.textContent = hora;
+        tr.appendChild(horarioTd);
+
+       
+ 
+        if (horarios[hora].nome) {
+          nome = horarios[hora].nome
+          tel = horarios[hora].tel
+
+              const disponibilidadeTd = document.createElement('td');
+            disponibilidadeTd.textContent =  `Nome: ${nome} | Telefone: ${tel}`;
+            tr.appendChild(disponibilidadeTd);
+        } else {
+          const disponibilidadeTd = document.createElement('td');
+            disponibilidadeTd.textContent = 'Sem clientes nesse hoário'
+            tr.appendChild(disponibilidadeTd);
+        }
+
+
+ 
+
+        const actionTd = document.createElement('td');
+        actionTd.style.textAlign = 'Center';
+
+
+        
+        if (horarios[hora].disponibilidade == 'aguardandopagamento') {
+            const btn = createButtontato('Confirmar', hora, horarios[hora].tel, horarios[hora].nome, );
+            btn.classList.add('agendarhorario');
+            actionTd.appendChild(btn);
+        } else {
+            const pIndisponivel = document.createElement('p');
+            pIndisponivel.textContent = 'Horário  disponível';
+            pIndisponivel.style = 'color: red; text-align: center';
+            actionTd.appendChild(pIndisponivel);
+        }
+
+        tr.appendChild(actionTd);
+        tbody.appendChild(tr);
+    }
+}
+
+
+
+
+ 
+function Confirmar(tel, nome, hora){
+
+  console.log('chamando', tel, nome, hora)
+  marcarhorariotato(tel, nome, hora)
+}
+
+
+function createButtontato(text, hora, tel, nome) {
+  console.log(tel, nome, hora)
+
+  const tel2 = tel
+  const hora2 = hora
+  const nome2 = nome
+    const button = document.createElement('button');
+    button.textContent = text;
+    button.addEventListener('click', () => Confirmar(tel2, nome2, hora2));
+    return button;
 }
 
 

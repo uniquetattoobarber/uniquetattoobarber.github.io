@@ -915,7 +915,33 @@ input[type="checkbox"] {
     </div>
 </div>
 
-  
+
+
+<div id="modalnometato" class="bgL" style="z-index: 200;" >
+  <div class="bgconteudo2" style="z-index: 50; width: 200px; height: 200px;">
+
+    
+      <div style="position: relative; left: 380px; top: -40px; margin-bottom: 0;" class="fechar" onclick="fecharmodalnome('modalhorario')">
+          <p>X</p>
+      </div>
+
+      <p id="textotitulo" style="margin: 0 auto; text-align: center; width: 100%; color: black;">
+        Agendar horário para sua tataugem
+      </p>
+
+      <div class="bgcontentt" style="position: relative; top: 0px; padding: 20px; text-align: center;">
+
+        <input type="text" id="nometato" placeholder="nome">
+        <input style="margin-top: 20px;" type="text" id="emailtato" placeholder="Telefone (Whatsapp)">
+
+        <br>
+        <button style="color: #252525; margin-top: 20px;" onclick="marcarhorariotato()">Agendar horário</button>
+
+      </div>
+  </div>
+</div>
+
+
 
 
 
@@ -969,6 +995,59 @@ input[type="checkbox"] {
     </div>
 </div>
  
+
+
+<div id="modalhorariotato" class="bgL">
+  <div class="bgconteudo2">
+      <div style="position: relative; left: 380px; top: -40px; margin-bottom: 0;" class="fechar" onclick="fecharmodal('modalhorariotato')">
+          <p>X</p>
+      </div>
+
+      <p id="textotitulotato" style="margin: 0 auto; text-align: center; width: 100%;"></p>
+
+      <div class="bgcontentt" style="position: relative; top: 0px;">
+          <div style="text-align: center; margin-bottom: 20px;">
+
+
+
+            <div style="display: flex;">
+
+              <button style="color: #252525;" id="anteriortato">Dia Anterior</button>
+
+              <span id="dataAtual" style="color: #000;"></span>
+
+              <button style="color: #252525;" id="proximotato">Próximo Dia</button>
+
+            </div>
+
+
+            
+    <div class="containertable" id="cortes" >
+      
+      
+      <table id="dataTabletato" style="background-color: white;">
+          <thead>
+              <tr>
+                  <th>Horários</th>
+                  <th>Disponibilidade</th>
+                  <th style="width: 200px;">Ações</th>
+              </tr>
+          </thead>
+          <tbody>
+              <!-- Linhas serão adicionadas dinamicamente aqui -->
+          </tbody>
+      </table>
+  </div>
+
+
+
+          </div>
+  
+      </div>
+  </div>
+</div>
+
+
 
 <div id="sucesso" class="bgL">
   <div class="bgconteudo2" style="background-color: #4CAF50; height: 90px;">
@@ -1105,10 +1184,12 @@ input[type="checkbox"] {
           </li>
           <li>
             <p>Entre em contato com a gente e agende seu horário</p>
+
+
            
           </li>
         </ul>
-        <a  onclick="redireciona()" class="btn" href="https://wa.me/message/3K5ZU4AB3DHNG1">Contato</a>
+      <button onclick="abrirmodaltatuagem()" class="btn gallery-next" style="width: 100%;" type="button">Agendar seu horario</button>
          </div>
       </div>
 
@@ -1236,13 +1317,13 @@ input[type="checkbox"] {
           <br>
          
           <br>
-          Telefone: +7 (812) 666-02-62 
+          Telefone: +55 41 9864-9342
         </section>
         <section class="footer-social">
           <p>Siga a gente em todas as redes!</p>
           <a class="social-btn social-btn-vk" href="#">ВКонтакте</a>
           <a class="social-btn social-btn-fb" href="#">Фэйсбук</a>
-          <a class="social-btn social-btn-inst" href="#">Инстаграм</a>
+          <a class="social-btn social-btn-inst" href="https://www.instagram.com/uniquetattoobarber/">Инстаграм</a>
         </section>
 
         <section class="footer-social">
@@ -1322,6 +1403,12 @@ function abrirmodal(id) {
     fazerRequisicaoGet();
 }
 
+function abrirmodaltatuagem() {
+    const elemento = document.getElementById('modalhorariotato');
+    elemento.style.display = 'initial';
+    fazerRequisicaoGettato();
+}
+
 function fecharmodal(id) {
     const elemento = document.getElementById(id);
     elemento.style.display = 'none';
@@ -1358,7 +1445,7 @@ function marcarhorario() {
 
     const mes = String(currentDay.getMonth() + 1).padStart(2, '0');
     const dia = String(currentDay.getDate()).padStart(2, '0');
-    const url = `https://thtato-20e86-default-rtdb.firebaseio.com/meses/${mes}/dias/${dia}/horarios/${horaglobal}.json`;
+    const url = `https://thtato-20e86-default-rtdb.firebaseio.com/barbearia/meses/${mes}/dias/${dia}/horarios/${horaglobal}.json`;
 
     fetch(url, {
         method: 'PATCH',
@@ -1372,6 +1459,33 @@ function marcarhorario() {
           fazerRequisicaoGet();
       });
 }
+
+function marcarhorariotato() {
+  const tel = document.getElementById('emailtato').value
+  const nome = document.getElementById('nometato').value
+
+  console.log(horaglobal)
+
+
+    const mes = String(currentDay.getMonth() + 1).padStart(2, '0');
+    const dia = String(currentDay.getDate()).padStart(2, '0');
+    const url = `https://thtato-20e86-default-rtdb.firebaseio.com/tattoo/meses/${mes}/dias/${dia}/horarios/${horaglobal}.json`;
+
+    fetch(url, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ disponibilidade: 'aguardandopagamento', tel: tel, nome: nome})
+    }).then(response => response.json())
+      .then(data => {
+          console.log('Horário atualizado:', data);
+          const elemento = document.getElementById('modalnometato');
+    elemento.style.display = 'none';
+          fazerRequisicaoGettato();
+      });
+}
+
+
+
 
 function Cadastrarusuario() {
   const email = document.getElementById('emailcli').value
@@ -1417,7 +1531,7 @@ function Cadastrarusuario() {
 function fazerRequisicaoGet() {
     const mes = String(currentDay.getMonth() + 1).padStart(2, '0');
     const dia = String(currentDay.getDate()).padStart(2, '0');
-    const url = `https://thtato-20e86-default-rtdb.firebaseio.com/meses/${mes}/dias/${dia}.json`;
+    const url = `https://thtato-20e86-default-rtdb.firebaseio.com/barbearia/meses/${mes}/dias/${dia}.json`;
 
     fetch(url)
         .then(response => response.json())
@@ -1426,6 +1540,26 @@ function fazerRequisicaoGet() {
                 document.getElementById('textotitulo').innerText = `Horários de ${data.diadasemana}, ${data.data}`;
                 document.getElementById('textotitulo').style.color = 'black'
                 populateTable(data.horarios);
+            }
+        });
+}
+
+function fazerRequisicaoGettato() {
+    const mes = String(currentDay.getMonth() + 1).padStart(2, '0');
+    const dia = String(currentDay.getDate()).padStart(2, '0');
+    const url = `https://thtato-20e86-default-rtdb.firebaseio.com/tattoo/meses/${mes}/dias/${dia}.json`;
+
+    fetch(url)
+        .then(response => response.json())
+        .then(data => {
+
+            console.log(data)
+
+            if (data) {
+
+                document.getElementById('textotitulotato').innerText = `Horários de ${data.diadasemana}, ${data.data}`;
+                document.getElementById('textotitulotato').style.color = 'black'
+                populateTabletato(data.horarios);
             }
         });
 }
@@ -1471,10 +1605,63 @@ function createButton(text, hora) {
     return button;
 }
 
+
+function abrirmodalcolocarnometattoo(hora){
+  horaglobal = hora
+  console.log(horaglobal)
+  const elemento = document.getElementById('modalnometato');
+    elemento.style.display = 'initial';
+}
+
+
+function populateTabletato(horarios) {
+    const tbody = document.querySelector('#dataTabletato tbody');
+    tbody.innerHTML = '';
+
+    for (const hora in horarios) {
+        const tr = document.createElement('tr');
+
+        const horarioTd = document.createElement('td');
+        horarioTd.textContent = hora;
+        tr.appendChild(horarioTd);
+
+        const disponibilidadeTd = document.createElement('td');
+        disponibilidadeTd.textContent = horarios[hora].disponibilidade ? 'disponivel' : 'agendado';
+        tr.appendChild(disponibilidadeTd);
+
+        const actionTd = document.createElement('td');
+        actionTd.style.textAlign = 'Center';
+
+        if (horarios[hora].disponibilidade == 'disponivel') {
+            const btn = createButtontato('Agendar', hora);
+            btn.classList.add('agendarhorario');
+            actionTd.appendChild(btn);
+        } else {
+            const pIndisponivel = document.createElement('p');
+            pIndisponivel.textContent = 'Horário indisponível';
+            pIndisponivel.style = 'color: red; text-align: center';
+            actionTd.appendChild(pIndisponivel);
+        }
+
+        tr.appendChild(actionTd);
+        tbody.appendChild(tr);
+    }
+}
+
+function createButtontato(text, hora) {
+    const button = document.createElement('button');
+    button.textContent = text;
+    button.addEventListener('click', () => abrirmodalcolocarnometattoo(hora));
+    return button;
+}
+
+
+
 function mudarDia(incremento) {
     currentDay.setDate(currentDay.getDate() + incremento);
     fazerRequisicaoGet();
-    atualizarDataAtual();
+    fazerRequisicaoGettato();
+        atualizarDataAtual();
 }
 
 function atualizarDataAtual() {
@@ -1486,6 +1673,10 @@ function atualizarDataAtual() {
 document.getElementById('anterior').addEventListener('click', () => mudarDia(-1));
 document.getElementById('proximo').addEventListener('click', () => mudarDia(1));
 
+
+document.getElementById('anteriortato').addEventListener('click', () => mudarDia(-1));
+document.getElementById('proximotato').addEventListener('click', () => mudarDia(1));
+
 // Inicializa a data exibida ao abrir o modal
 atualizarDataAtual();
 
@@ -1494,7 +1685,6 @@ atualizarDataAtual();
         if(action == 'Agendar'){
             update(id)
         }
-       
       
     }
 
