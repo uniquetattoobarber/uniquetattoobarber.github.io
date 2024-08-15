@@ -863,6 +863,37 @@ input[type="checkbox"] {
     </div>
 </div>
 
+
+<div id="modalmarcarhorarioadmin" class="bgL" style="z-index: 51; display: none; background-color: #000000d7;" >
+  <div class="bgconteudo2" style="z-index: 50; width: 400px; height: 200px;">
+    
+      <p id="textotitulo" style="margin: 0 auto; text-align: center; width: 100%; color: #000; font-size:12px;"> selecione o tempo para fazer essa tatuagem</p>
+
+
+
+      <div class="bgcontentt" style="position: relative; top: 0px; padding: 20px; text-align: center;">
+
+
+        <br>
+      <select name="horarios" id="horarios">
+        <option value="1">1 hora</option>
+        <option value="2">2 horas</option>
+        <option value="3">3 horas</option>
+        <option value="4">4 horas</option>
+        <option value="5">5 horas</option>
+        <option value="6">6 horas</option>
+        <option value="7">7 horas</option>
+        <option value="8">8 horas</option>
+        <option value="9">9 horas</option>
+        <option value="10">10 horas</option>
+      </select>
+
+        <br>
+        <button style="color: #252525; margin-top: 20px;" onclick="marcarhorariotato()">Confirmar</button>
+
+      </div>
+  </div>
+</div>
   
 
 
@@ -1221,24 +1252,6 @@ function fazerRequisicaoGet() {
 
 
 
-function marcarhorariotato(tel, nome, hora) {
-
-  console.log(tel, nome, hora)
-
-    const mes = String(currentDay.getMonth() + 1).padStart(2, '0');
-    const dia = String(currentDay.getDate()).padStart(2, '0');
-    const url = `https://thtato-20e86-default-rtdb.firebaseio.com/tattoo/meses/${mes}/dias/${dia}/horarios/${hora}.json`;
-
-    fetch(url, {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ disponibilidade: 'agendado', tel: tel, nome: nome})
-    }).then(response => response.json())
-      .then(data => {
-          
-        fazerRequisicaoGettato();
-      });
-}
 
 
 function fazerRequisicaoGettato() {
@@ -1326,9 +1339,90 @@ function populateTabletato(horarios) {
  
 function Confirmar(tel, nome, hora){
 
-  console.log('chamando', tel, nome, hora)
-  marcarhorariotato(tel, nome, hora)
+  const elemento = document.getElementById('modalmarcarhorarioadmin');
+  elemento.style.display = 'initial';
+
+  
+
+
 }
+
+telglobal = null
+nomeglobal = null
+horaglobal = null
+
+function setarvarias(tel, nome, hora ){
+
+  telglobal = tel
+nomeglobal = nome
+horaglobal = hora
+
+}
+
+function confirmarhorario(tel, nome, hora) {
+  
+  const elemento = document.getElementById('modalmarcarhorarioadmin');
+  elemento.style.display = 'initial';
+  
+  console.log('chamando', tel, nome, hora);
+  setarvarias(tel, nome, hora );
+}
+
+
+
+function marcarhorariotato() {
+
+const tel= telglobal
+ const nome = nomeglobal
+ const hora = horaglobal
+
+  const duracao = document.getElementById('horarios').value;  
+  console.log(tel, nome, hora, duracao);
+
+  const mes = String(currentDay.getMonth() + 1).padStart(2, '0');
+  const dia = String(currentDay.getDate()).padStart(2, '0');
+  
+  // Função auxiliar para converter a hora no formato "HH:mm" para horas inteiras (por exemplo, 11:00 para 11)
+  function horaParaInteiro(hora) {
+    return parseInt(hora.split(':')[0], 10);
+  }
+
+  // Função auxiliar para converter uma hora inteira de volta para o formato "HH:mm"
+  function inteiroParaHora(inteiro) {
+    return String(inteiro).padStart(2, '0') + ":00";
+  }
+
+  const inicioHora = horaParaInteiro(hora);
+  const promises = [];
+
+  for (let i = 0; i < duracao; i++) {
+    const horarioAtual = inteiroParaHora(inicioHora + i);
+    const url = `https://thtato-20e86-default-rtdb.firebaseio.com/tattoo/meses/${mes}/dias/${dia}/horarios/${horarioAtual}.json`;
+
+    const promessa = fetch(url, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        disponibilidade: 'agendado',
+        tel: tel,
+        nome: nome,
+        duracao: duracao + ' horas'
+      })
+    }).then(response => response.json());
+    
+    promises.push(promessa);
+  }
+
+  Promise.all(promises).then(() => {
+    console.log('Horários marcados com sucesso');
+    fazerRequisicaoGettato();
+    const elemento = document.getElementById('modalmarcarhorarioadmin');
+    elemento.style.display = 'none';
+  });
+}
+
+
+
 
 
 function createButtontato(text, hora, tel, nome) {
@@ -1339,7 +1433,7 @@ function createButtontato(text, hora, tel, nome) {
   const nome2 = nome
     const button = document.createElement('button');
     button.textContent = text;
-    button.addEventListener('click', () => Confirmar(tel2, nome2, hora2));
+    button.addEventListener('click', () => confirmarhorario(tel2, nome2, hora2));
     return button;
 }
 
