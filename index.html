@@ -892,6 +892,35 @@ input[type="checkbox"] {
 <body>
 
 
+
+
+
+  <div id="modalwts" class="bgL">
+    <div class="bgconteudo2" style="height: 200px; width: 600px; background-color: #c3c0c0ca;">
+        <div style="position: relative; left: 330px; top: -40px; margin-bottom: 0;" class="fechar" onclick="fecharmodalwts()">
+            <p>X</p>
+        </div>
+
+      
+        <div class="bgcontentt" style="position: relative; top: 0px; text-align: center; width: 100%; margin: 0 auto;">
+          
+          <button style="background-color: #42872b; margin-top: 20px; width: 400px; height: 40px; font-size: 20px;" onclick="tatu()">Falar com TH (Tatuador)</button>
+
+          <br>
+          <button  style="background-color: #42872b; margin-top: 20px; width: 400px; height: 40px; font-size: 20px;" onclick="barba()">Falar com Mateus (Barbeiro)</button>
+
+
+
+    
+        </div>
+    </div>
+</div>
+ 
+
+
+
+
+
   
 
   <div id="modalnome" class="bgL" style="z-index: 200;" >
@@ -1133,9 +1162,11 @@ input[type="checkbox"] {
               <p>
                 Com um ambiente acolhedor e profissionais dedicados, oferecemos não apenas cortes de cabelo e barbas estilizados,
                  mas também um completo leque de serviços de estética e relaxamento.</p>
-              <time datetime="2016-01-11">11 января</time>
+                
+     
+
             </li>
-          
+
           </ul>
         
         </div>
@@ -1146,8 +1177,10 @@ input[type="checkbox"] {
               <img src="https://loriens.github.io/barbershop/img/gallery.jpg" alt="Галерея" width="286" height="164">
             </figure>
         
-            <button onclick="abrirmodal('modalhorario')" class="btn gallery-next" style="width: 100%;" type="button">Agendar seu horario</button>
+      
            </div>
+
+           <button onclick="abrirmodal('modalhorario')" class="btn gallery-next" style="width: 100%;" type="button">Agendar seu horario</button>
          </div>
       </div>
 
@@ -1393,9 +1426,27 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         })
 
 function redireciona(){
+      const elemento = document.getElementById('modalwts');
+      elemento.style.display = 'initial';
 
+}
+
+function fecharmodalwts(){
+  const elemento = document.getElementById('modalwts');
+  elemento.style.display = 'none';
+
+}
+
+
+function tatu(){
   window.location.href = `https://wa.me/message/3K5ZU4AB3DHNG1`
 }
+
+function barba(){
+  window.location.href =  `https://wa.me/554199798452`
+}
+
+
 let currentDay = new Date();
 
 function abrirmodal(id) {
