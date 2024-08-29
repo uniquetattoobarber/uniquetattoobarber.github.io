@@ -897,6 +897,37 @@ input[type="checkbox"] {
   
 
 
+<div id="modalmarcarhorarioadminbarba" class="bgL" style="z-index: 51; display: none; background-color: #000000d7;" >
+  <div class="bgconteudo2" style="z-index: 50; width: 400px; height: 200px;">
+    
+      <p id="textotitulo" style="margin: 0 auto; text-align: center; width: 100%; color: #000; font-size:12px;"> selecione o tempo para fazer esse corte</p>
+
+
+
+      <div class="bgcontentt" style="position: relative; top: 0px; padding: 20px; text-align: center;">
+
+
+        <br>
+      <select name="horarios" id="horariosbarba">
+        <option value="1">1 hora</option>
+        <option value="2">2 horas</option>
+        <option value="3">3 horas</option>
+        <option value="4">4 horas</option>
+        <option value="5">5 horas</option>
+        <option value="6">6 horas</option>
+        <option value="7">7 horas</option>
+        <option value="8">8 horas</option>
+        <option value="9">9 horas</option>
+        <option value="10">10 horas</option>
+      </select>
+
+        <br>
+        <button style="color: #252525; margin-top: 20px;" onclick="marcarhorariobarba()">Confirmar</button>
+
+      </div>
+  </div>
+</div>
+
 
  
 
@@ -1241,7 +1272,10 @@ function fazerRequisicaoGet() {
     fetch(url)
         .then(response => response.json())
         .then(data => {
-            if (data && data.horarios) {
+
+            console.log(data)
+
+            if (data) {
                 document.getElementById('textotitulo').innerText = `Horários de ${data.diadasemana}, ${data.data}`;
      
 
@@ -1347,6 +1381,22 @@ function Confirmar(tel, nome, hora){
 
 }
 
+
+
+
+function Confirmarcorte(tel, nome, hora){
+
+const elemento = document.getElementById('modalmarcarhorarioadminbarba');
+elemento.style.display = 'initial';
+
+console.log('chamando', tel, nome, hora);
+setarvarias(tel, nome, hora );
+
+
+}
+
+
+
 telglobal = null
 nomeglobal = null
 horaglobal = null
@@ -1366,6 +1416,67 @@ function confirmarhorario(tel, nome, hora) {
   
   console.log('chamando', tel, nome, hora);
   setarvarias(tel, nome, hora );
+}
+
+
+
+
+function marcarhorariobarba() {
+
+const tel = telglobal
+ const nome = nomeglobal
+ const hora = horaglobal
+
+ 
+  
+console.log("marcar horario barba", hora)
+
+  const duracao = document.getElementById('horariosbarba').value;  
+  console.log(tel, nome, hora, duracao);
+
+  const mes = String(currentDay.getMonth() + 1).padStart(2, '0');
+  const dia = String(currentDay.getDate()).padStart(2, '0');
+  
+  // Função auxiliar para converter a hora no formato "HH:mm" para horas inteiras (por exemplo, 11:00 para 11)
+  function horaParaInteiro(hora) {
+    return parseInt(hora.split(':')[0], 10);
+  }
+
+  // Função auxiliar para converter uma hora inteira de volta para o formato "HH:mm"
+  function inteiroParaHora(inteiro) {
+    return String(inteiro).padStart(2, '0') + ":00";
+  }
+
+  const inicioHora = horaParaInteiro(hora);
+  const promises = [];
+
+
+  console.log("duracao:", duracao)
+
+  for (let i = 0; i < duracao; i++) {
+    const horarioAtual = inteiroParaHora(inicioHora + i);
+    const url = `https://thtato-20e86-default-rtdb.firebaseio.com/barbearia/meses/${mes}/dias/${dia}/horarios/${horarioAtual}.json`;
+
+    const promessa = fetch(url, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        disponibilidade: 'agendado',
+        tel: tel,
+        nome: nome,
+        duracao: duracao + ' horas'
+      })
+    }).then(response => response.json());
+    
+    promises.push(promessa);
+  }
+
+  Promise.all(promises).then(() => {
+    console.log('Horários marcados com sucesso');
+    fazerRequisicaoGet();
+    const elemento = document.getElementById('modalmarcarhorarioadminbarba');
+    elemento.style.display = 'none';
+  });
 }
 
 
@@ -1424,6 +1535,18 @@ const tel= telglobal
 
 
 
+
+function createButtoncorte(text, hora, tel, nome) {
+  console.log(tel, nome, hora)
+
+  const tel2 = tel
+  const hora2 = hora
+  const nome2 = nome
+    const button = document.createElement('button');
+    button.textContent = text;
+    button.addEventListener('click', () => Confirmarcorte(tel2, nome2, hora2));
+    return button;
+}
 
 function createButtontato(text, hora, tel, nome) {
   console.log(tel, nome, hora)
@@ -1499,54 +1622,63 @@ function createButtonc(text, hora) {
 
 
 function populateTable(horarios) {
-    const tbody = document.querySelector('#dataTable tbody');
-    tbody.innerHTML = '';
 
-    for (const hora in horarios) {
-        const tr = document.createElement('tr');
+  const tbody = document.querySelector('#dataTable tbody');
 
-        const horarioTd = document.createElement('td');
-        horarioTd.textContent = hora;
-        tr.appendChild(horarioTd);
+tbody.innerHTML = '';
+
+for (const hora in horarios) {
+    const tr = document.createElement('tr');
+
+    const horarioTd = document.createElement('td');
+    horarioTd.textContent = hora;
+    tr.appendChild(horarioTd);
+
+   
+
+    if (horarios[hora].nome) {
+      nome = horarios[hora].nome
+      tel = horarios[hora].tel
+
+          const disponibilidadeTd = document.createElement('td');
+        disponibilidadeTd.textContent =  `Nome: ${nome} | Telefone: ${tel}`;
+        tr.appendChild(disponibilidadeTd);
+    } else {
+      const disponibilidadeTd = document.createElement('td');
+        disponibilidadeTd.textContent = 'Sem clientes nesse hoário'
+        tr.appendChild(disponibilidadeTd);
+    }
+
+
+    const actionTd = document.createElement('td');
+    actionTd.style.textAlign = 'Center';
+
 
     
-
-        const actionTd = document.createElement('td');
-        actionTd.style.textAlign = 'Center';
-
-
-        if (horarios[hora].nome) {
-          nome = horarios[hora].nome
-          tel = horarios[hora].tel
-
-              const disponibilidadeTd = document.createElement('td');
-            disponibilidadeTd.textContent =  `Nome: ${nome} | Telefone: ${tel}`;
-            tr.appendChild(disponibilidadeTd);
-
-
-
-        } else {
-          const disponibilidadeTd = document.createElement('td');
-            disponibilidadeTd.textContent = 'Sem clientes nesse hoário'
-            tr.appendChild(disponibilidadeTd);
-        }
-
-
-        if (horarios[hora].disponibilidade) {
-          const pIndisponivel = document.createElement('p');
-            pIndisponivel.textContent = 'Horário livre';
-            pIndisponivel.style = 'color: #c9c22c; text-align: center';
-            actionTd.appendChild(pIndisponivel);
-        } else {
-            const pIndisponivel = document.createElement('p');
-            pIndisponivel.textContent = 'Horário agendado';
-            pIndisponivel.style = 'color: green; text-align: center';
-            actionTd.appendChild(pIndisponivel);
-        }
-
-        tr.appendChild(actionTd);
-        tbody.appendChild(tr);
+    if (horarios[hora].disponibilidade == 'aguardandopagamento') {
+        const btn = createButtoncorte('Confirmarcorte', hora, horarios[hora].tel, horarios[hora].nome, );
+        btn.classList.add('agendarhorario');
+        actionTd.appendChild(btn);
+    } else if(horarios[hora].disponibilidade == 'disponivel')
+    {
+        const pIndisponivel = document.createElement('p');
+        pIndisponivel.textContent = 'Horário  disponível';
+        pIndisponivel.style = 'color: green; text-align: center';
+        actionTd.appendChild(pIndisponivel);
+    }else if(horarios[hora].disponibilidade == 'agendado')
+    {
+        const pIndisponivel = document.createElement('p');
+        pIndisponivel.textContent = 'Horário  indisponível';
+        pIndisponivel.style = 'color: red; text-align: center';
+        actionTd.appendChild(pIndisponivel);
     }
+
+    tr.appendChild(actionTd);
+    tbody.appendChild(tr);
+}
+
+
+
 }
 
 function createButton(text, hora) {

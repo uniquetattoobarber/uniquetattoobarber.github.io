@@ -1494,6 +1494,8 @@ function fecharmodalnome(id){
 }
 
 
+
+
 function marcarhorario() {
   const tel = document.getElementById('email').value
   const nome = document.getElementById('nome').value
@@ -1508,15 +1510,17 @@ function marcarhorario() {
     fetch(url, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ disponibilidade: false, tel: tel, nome: nome})
+        body: JSON.stringify({ disponibilidade: 'aguardandopagamento', tel: tel, nome: nome})
     }).then(response => response.json())
       .then(data => {
           console.log('Horário atualizado:', data);
           const elemento = document.getElementById('modalnome');
     elemento.style.display = 'none';
-          fazerRequisicaoGet();
+    window.location.href = `https://wa.me/554199798452`
       });
 }
+
+
 
 function marcarhorariotato() {
   const tel = document.getElementById('emailtato').value
