@@ -788,7 +788,12 @@ input[type="checkbox"] {
             border-radius: 4px;
         }
         .agendarhorario{
-            background-color: #4CAF50;
+                background-color: #4CAF50;
+                text-align: center;
+                margin: 0 auto;
+        }
+        .desmarcar{
+          background-color: #b11a1a;
             text-align: center;
             margin: 0 auto;
         }
@@ -1356,10 +1361,9 @@ function populateTabletato(horarios) {
             actionTd.appendChild(pIndisponivel);
         }else if(horarios[hora].disponibilidade == 'agendado')
         {
-            const pIndisponivel = document.createElement('p');
-            pIndisponivel.textContent = 'Horário  indisponível';
-            pIndisponivel.style = 'color: red; text-align: center';
-            actionTd.appendChild(pIndisponivel);
+          const btn = createButtontatodes('Desmarcar', hora, horarios[hora].tel, horarios[hora].nome, );
+            btn.classList.add('desmarcar');
+            actionTd.appendChild(btn);
         }
 
         tr.appendChild(actionTd);
@@ -1396,6 +1400,16 @@ setarvarias(tel, nome, hora );
 }
 
 
+function Desmarcarcorte(tel, nome, hora){
+
+
+console.log('chamando', tel, nome, hora);
+desmarcarhorariobarbaf(tel, nome, hora );
+
+
+}
+
+
 
 telglobal = null
 nomeglobal = null
@@ -1416,6 +1430,64 @@ function confirmarhorario(tel, nome, hora) {
   
   console.log('chamando', tel, nome, hora);
   setarvarias(tel, nome, hora );
+}
+
+
+
+function desmarcarhoario(tel, nome, hora) {
+  
+
+  
+  console.log('chamando', tel, nome, hora);
+  desmarcarhorariotato(tel, nome, hora );
+}
+
+
+function desmarcarhorariobarbaf(tel, nome, hora) {
+
+  
+
+  const mes = String(currentDay.getMonth() + 1).padStart(2, '0');
+  const dia = String(currentDay.getDate()).padStart(2, '0');
+  
+  // Função auxiliar para converter a hora no formato "HH:mm" para horas inteiras (por exemplo, 11:00 para 11)
+  function horaParaInteiro(hora) {
+    return parseInt(hora.split(':')[0], 10);
+  }
+
+  // Função auxiliar para converter uma hora inteira de volta para o formato "HH:mm"
+  function inteiroParaHora(inteiro) {
+    return String(inteiro).padStart(2, '0') + ":00";
+  }
+
+  const inicioHora = horaParaInteiro(hora);
+  const promises = [];
+
+
+
+  for (let i = 0; i < 1; i++) {
+    const horarioAtual = inteiroParaHora(inicioHora + i);
+    const url = `https://thtato-20e86-default-rtdb.firebaseio.com/barbearia/meses/${mes}/dias/${dia}/horarios/${horarioAtual}.json`;
+
+    const promessa = fetch(url, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        disponibilidade: 'disponivel',
+        tel: null,
+        nome: null,
+       
+      })
+    }).then(response => response.json());
+    
+    promises.push(promessa);
+  }
+
+  Promise.all(promises).then(() => {
+    console.log('Horários marcados com sucesso');
+    fazerRequisicaoGet();
+  
+  });
 }
 
 
@@ -1534,6 +1606,56 @@ const tel= telglobal
 
 
 
+function desmarcarhorariotato(tel, nome, hora ) {
+
+
+  console.log(tel, nome, hora);
+
+  const mes = String(currentDay.getMonth() + 1).padStart(2, '0');
+  const dia = String(currentDay.getDate()).padStart(2, '0');
+  
+  // Função auxiliar para converter a hora no formato "HH:mm" para horas inteiras (por exemplo, 11:00 para 11)
+  function horaParaInteiro(hora) {
+    return parseInt(hora.split(':')[0], 10);
+  }
+
+  // Função auxiliar para converter uma hora inteira de volta para o formato "HH:mm"
+  function inteiroParaHora(inteiro) {
+    return String(inteiro).padStart(2, '0') + ":00";
+  }
+
+  const inicioHora = horaParaInteiro(hora);
+  const promises = [];
+
+  for (let i = 0; i < 1; i++) {
+    const horarioAtual = inteiroParaHora(inicioHora + i);
+    const url = `https://thtato-20e86-default-rtdb.firebaseio.com/tattoo/meses/${mes}/dias/${dia}/horarios/${horarioAtual}.json`;
+
+    const promessa = fetch(url, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        disponibilidade: 'disponivel',
+        tel: null,
+        nome: null,
+      })
+    }).then(response => response.json());
+    
+    promises.push(promessa);
+  }
+
+  Promise.all(promises).then(() => {
+    console.log('Horários marcados com sucesso');
+    fazerRequisicaoGettato();
+   
+  });
+}
+
+
+
+
+
+
 
 
 function createButtoncorte(text, hora, tel, nome) {
@@ -1548,6 +1670,24 @@ function createButtoncorte(text, hora, tel, nome) {
     return button;
 }
 
+
+
+
+
+function createButtoncortesdesm(text, hora, tel, nome) {
+  console.log(tel, nome, hora)
+
+  const tel2 = tel
+  const hora2 = hora
+  const nome2 = nome
+    const button = document.createElement('button');
+    button.textContent = text;
+    button.addEventListener('click', () => Desmarcarcorte(tel2, nome2, hora2));
+    return button;
+}
+
+
+
 function createButtontato(text, hora, tel, nome) {
   console.log(tel, nome, hora)
 
@@ -1557,6 +1697,18 @@ function createButtontato(text, hora, tel, nome) {
     const button = document.createElement('button');
     button.textContent = text;
     button.addEventListener('click', () => confirmarhorario(tel2, nome2, hora2));
+    return button;
+}
+
+function createButtontatodes(text, hora, tel, nome) {
+  console.log(tel, nome, hora)
+
+  const tel2 = tel
+  const hora2 = hora
+  const nome2 = nome
+    const button = document.createElement('button');
+    button.textContent = text;
+    button.addEventListener('click', () => desmarcarhoario(tel2, nome2, hora2));
     return button;
 }
 
@@ -1667,10 +1819,9 @@ for (const hora in horarios) {
         actionTd.appendChild(pIndisponivel);
     }else if(horarios[hora].disponibilidade == 'agendado')
     {
-        const pIndisponivel = document.createElement('p');
-        pIndisponivel.textContent = 'Horário  indisponível';
-        pIndisponivel.style = 'color: red; text-align: center';
-        actionTd.appendChild(pIndisponivel);
+      const btn = createButtoncortesdesm('Desmarcar', hora, horarios[hora].tel, horarios[hora].nome, );
+            btn.classList.add('desmarcar');
+            actionTd.appendChild(btn);
     }
 
     tr.appendChild(actionTd);
